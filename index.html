@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בניין בית הכנסת שלנו | קמפיין גיוס כספים</title>
+<meta name="description" content="קמפיין לבניית בית הכנסת של הקהילה שלנו. יחד נוכל להגשים את החלום.">
+<meta property="og:title" content="בניין בית הכנסת שלנו">
+<meta property="og:description" content="עזרו לנו לבנות בית לקהילה שלנו. כל תרומה מקרבת אותנו לחלום.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --blue-deep: #0D2B5E;
+    --blue-mid: #1A4FA0;
+    --blue-light: #2E73CC;
+    --blue-soft: #D6E8FF;
+    --gold: #C8920A;
+    --gold-bright: #F5B418;
+    --gold-light: #FFF3CC;
+    --orange: #E05C1A;
+    --orange-light: #FFF0E8;
+    --white: #FFFFFF;
+    --off-white: #FAF8F4;
+    --gray-100: #F4F2EE;
+    --gray-200: #E8E4DC;
+    --gray-400: #A09585;
+    --gray-600: #6B5E50;
+    --gray-800: #2C1E0F;
+    --text-primary: #1A0F00;
+    --text-secondary: #5A4A38;
+    --shadow-sm: 0 2px 8px rgba(13,43,94,0.08);
+    --shadow-md: 0 8px 32px rgba(13,43,94,0.14);
+    --shadow-lg: 0 20px 60px rgba(13,43,94,0.2);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --radius-pill: 100px;
+  }
+
+  /* ===== RESET ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--off-white);
+    color: var(--text-primary);
+    direction: rtl;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  button { cursor: pointer; border: none; background: none; font-family: inherit; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== TYPOGRAPHY ===== */
+  .font-display { font-family: 'Frank Ruhl Libre', serif; }
+  h1, h2, h3 { font-family: 'Frank Ruhl Libre', serif; line-height: 1.2; }
+
+  /* ===== UTILITY ===== */
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-bright);
+    color: var(--blue-deep);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 14px 36px;
+    border-radius: var(--radius-pill);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(245,180,24,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,180,24,0.5); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--blue-mid);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--blue-mid);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--blue-mid); color: white; }
+
+  /* ===== NAV ===== */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    transition: background 0.4s, box-shadow 0.4s;
+    padding: 0 20px;
+  }
+  #navbar.scrolled {
+    background: var(--blue-deep);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+  }
+  .nav-logo {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: white;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo .star { font-size: 1.6rem; }
+  .nav-links { display: flex; align-items: center; gap: 8px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.92rem; font-weight: 500;
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.12); }
+  .nav-donate {
+    background: var(--gold-bright);
+    color: var(--blue-deep) !important;
+    font-weight: 700 !important;
+    padding: 8px 20px !important;
+    border-radius: var(--radius-pill) !important;
+  }
+  .nav-donate:hover { background: white !important; }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(10,25,58,0.75) 0%, rgba(10,25,58,0.6) 50%, rgba(10,25,58,0.88) 100%),
+      url('images/image6.png') center/cover no-repeat;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+  }
+  .hero-particles {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    background: var(--gold-bright);
+    border-radius: 50%;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 860px;
+    padding: 120px 20px 60px;
+    animation: fadeUp 1s ease-out both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,180,24,0.2);
+    border: 1px solid rgba(245,180,24,0.5);
+    color: var(--gold-bright);
+    font-size: 0.85rem; font-weight: 600;
+    padding: 6px 18px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+  }
+  #hero h1 {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px; margin-left: auto; margin-right: auto;
+  }
+
+  /* Hero Stats Box */
+  .hero-stats {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius);
+    padding: 28px 36px;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+  .stat-item { text-align: center; }
+  .stat-item .label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .stat-item .value {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: white;
+  }
+  .stat-item .value.gold { color: var(--gold-bright); }
+  .hero-progress-wrap { }
+  .hero-progress-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+  }
+  .progress-bar-outer {
+    height: 14px;
+    background: rgba(255,255,255,0.15);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-bright) 100%);
+    border-radius: var(--radius-pill);
+    transition: width 2s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+  }
+  .progress-bar-inner::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 20px; height: 100%;
+    background: rgba(255,255,255,0.4);
+    animation: shimmer 2s ease-in-out infinite;
+    border-radius: var(--radius-pill);
+  }
+  @keyframes shimmer {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+  .progress-pct {
+    font-size: 0.85rem;
+    color: var(--gold-bright);
+    font-weight: 700;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  /* Countdown */
+  .hero-countdown {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 32px;
+  }
+  .countdown-label {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    margin-left: 6px;
+  }
+  .countdown-unit {
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    min-width: 52px;
+  }
+  .countdown-unit .num {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    display: block;
+    line-height: 1;
+  }
+  .countdown-unit .lbl {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .countdown-sep {
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.4);
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+  .hero-cta-row {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    z-index: 2;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .hero-scroll .arrow {
+    width: 20px; height: 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    border-right: 2px solid rgba(255,255,255,0.4);
+    transform: rotate(45deg);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== MATCHING BANNER ===== */
+  #matching-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%);
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: sticky; top: 70px; z-index: 900;
+  }
+  #matching-banner.active { display: flex; }
+  .matching-icon { font-size: 1.4rem; animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+  /* ===== SECTION STYLES ===== */
+  section { padding: 90px 0; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-tag {
+    display: inline-block;
+    background: var(--blue-soft);
+    color: var(--blue-mid);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 14px;
+  }
+  .section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--blue-deep);
+    margin-bottom: 14px;
+  }
+  .section-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    border-radius: 2px;
+    margin: 16px auto 0;
+  }
+
+  /* ===== STORY SECTION ===== */
+  #story { background: white; }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .story-image-wrap {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: var(--shadow-lg);
+  }
+  .story-image-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .story-image-wrap:hover img { transform: scale(1.03); }
+  .story-badge-img {
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 100px; height: 100px;
+    background: var(--gold-bright);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    border: 4px solid white;
+    box-shadow: var(--shadow-md);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    color: var(--blue-deep);
+    line-height: 1;
+  }
+  .story-badge-img span:first-child { font-size: 1.8rem; }
+  .story-badge-img span:last-child { font-size: 0.7rem; }
+  .story-text h2 { font-size: 2.2rem; color: var(--blue-deep); margin-bottom: 20px; }
+  .story-text p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+  }
+  .story-text p strong { color: var(--blue-deep); font-weight: 700; }
+  .story-pillars {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin-top: 28px;
+  }
+  .pillar {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px; background: var(--off-white);
+    border-radius: var(--radius-sm);
+    border-right: 3px solid var(--gold);
+  }
+  .pillar-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .pillar-text strong {
+    display: block; font-size: 0.9rem; color: var(--blue-deep); font-weight: 700;
+  }
+  .pillar-text span { font-size: 0.82rem; color: var(--text-secondary); }
+
+  /* ===== DONATION SECTION ===== */
+  #donate { background: var(--off-white); }
+  .donation-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    max-width: 780px; margin: 0 auto;
+  }
+  .donation-header {
+    background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+  }
+  .donation-header h3 {
+    font-size: 1.7rem; margin-bottom: 6px;
+  }
+  .donation-header p { font-size: 0.95rem; opacity: 0.8; }
+  #matching-active-label {
+    display: none;
+    background: var(--gold-bright);
+    color: var(--blue-deep);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+    margin-top: 10px;
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  #matching-active-label.show { opacity: 1; display: inline-block; }
+  .donation-body { padding: 36px 40px; }
+  .amount-label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--blue-deep);
+    margin-bottom: 14px;
+  }
+  .amount-presets {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px; margin-bottom: 16px;
+  }
+  .amount-btn {
+    padding: 14px 8px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    background: var(--off-white);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .amount-btn:hover {
+    border-color: var(--blue-mid);
+    background: var(--blue-soft);
+  }
+  .amount-btn.selected {
+    border-color: var(--blue-mid);
+    background: var(--blue-mid);
+    color: white;
+  }
+  .amount-btn .multiplied {
+    position: absolute; top: -8px; right: -8px;
+    background: var(--orange);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: var(--radius-pill);
+    display: none;
+  }
+  .amount-btn .multiplied.show { display: block; }
+  .custom-amount-wrap {
+    position: relative; margin-bottom: 24px;
+  }
+  .custom-amount-wrap input {
+    width: 100%;
+    padding: 12px 44px 12px 16px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: 'Heebo', sans-serif;
+    color: var(--text-primary);
+    transition: border-color 0.2s;
+    background: var(--off-white);
+  }
+  .custom-amount-wrap input:focus {
+    outline: none; border-color: var(--blue-mid);
+    background: white;
+  }
+  .custom-amount-wrap .currency {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    font-weight: 700; color: var(--gray-600);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { }
+  .form-group label {
+    display: block; font-size: 0.88rem; font-weight: 600;
+    color: var(--blue-deep); margin-bottom: 6px;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: 'Heebo', sans-serif;
+    color: var(--text-primary);
+    transition: border-color 0.2s;
+    background: var(--off-white);
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--blue-mid); background: white;
+  }
+  .form-group textarea { height: 80px; resize: none; }
+  .donate-total-display {
+    background: var(--gold-light);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .donate-total-display .total-label {
+    font-size: 0.9rem; color: var(--gold);
+    font-weight: 600;
+  }
+  .donate-total-display .total-amount {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.8rem; font-weight: 900;
+    color: var(--blue-deep);
+  }
+  .donate-submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+    color: var(--blue-deep);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    padding: 18px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(245,180,24,0.35);
+  }
+  .donate-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,180,24,0.5); }
+  .donate-submit-btn:active { transform: translateY(0); }
+  .security-note {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: var(--gray-400);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* ===== SUCCESS OVERLAY ===== */
+  #success-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(10,25,58,0.85);
+    display: none;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(6px);
+  }
+  #success-overlay.show { display: flex; }
+  .success-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 50px 60px;
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.6); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .success-icon {
+    width: 90px; height: 90px;
+    background: var(--gold-bright);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 24px;
+    animation: spin 0.5s ease-out 0.3s both;
+  }
+  @keyframes spin {
+    from { transform: rotate(-180deg) scale(0); }
+    to { transform: rotate(0) scale(1); }
+  }
+  .success-card h3 {
+    font-size: 2rem; color: var(--blue-deep); margin-bottom: 10px;
+  }
+  .success-card p { color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+  .success-amount {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 2.4rem; font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ===== FAMILIES / LEADERBOARD ===== */
+  #families { background: white; }
+  #leaderboard { background: var(--off-white); }
+  .families-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .family-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    border: 1px solid var(--gray-200);
+    cursor: pointer;
+  }
+  .family-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .family-card-img {
+    height: 180px; overflow: hidden; position: relative;
+  }
+  .family-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .family-card:hover .family-card-img img { transform: scale(1.06); }
+  .family-card-img .family-card-badge {
+    position: absolute; bottom: 10px; right: 10px;
+    background: var(--blue-deep);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .family-card-body { padding: 20px; }
+  .family-card-name {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 4px;
+  }
+  .family-card-msg {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .family-progress-wrap { margin-bottom: 12px; }
+  .family-progress-bar {
+    height: 8px;
+    background: var(--gray-200);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .family-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-mid), var(--gold-bright));
+    border-radius: var(--radius-pill);
+    transition: width 1.5s ease;
+  }
+  .family-progress-stats {
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  .family-progress-stats .raised { font-weight: 700; color: var(--blue-deep); }
+  .family-card-btn {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: var(--blue-soft);
+    color: var(--blue-mid);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+  }
+  .family-card-btn:hover { background: var(--blue-mid); color: white; }
+
+  /* Leaderboard */
+  .leaderboard-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .lb-item {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
+    border: 1px solid var(--gray-200);
+  }
+  .lb-item:hover { transform: translateX(-4px); }
+  .lb-item.top-1 { border-right: 4px solid #FFD700; }
+  .lb-item.top-2 { border-right: 4px solid #C0C0C0; }
+  .lb-item.top-3 { border-right: 4px solid #CD7F32; }
+  .lb-rank {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.4rem; font-weight: 900;
+    color: var(--gray-400);
+    min-width: 40px;
+    text-align: center;
+  }
+  .lb-item.top-1 .lb-rank { color: #B8860B; }
+  .lb-item.top-2 .lb-rank { color: #808080; }
+  .lb-item.top-3 .lb-rank { color: #8B4513; }
+  .lb-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--gray-200);
+    flex-shrink: 0;
+  }
+  .lb-info { flex: 1; }
+  .lb-name {
+    font-weight: 700;
+    color: var(--blue-deep);
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .lb-bar-outer {
+    height: 6px; background: var(--gray-200);
+    border-radius: var(--radius-pill); overflow: hidden;
+  }
+  .lb-bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-mid), var(--gold-bright));
+    border-radius: var(--radius-pill);
+    transition: width 1.5s ease;
+  }
+  .lb-amount {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.2rem; font-weight: 900;
+    color: var(--blue-deep);
+    white-space: nowrap;
+  }
+  .medal { font-size: 1.5rem; }
+
+  /* ===== ADMIN TOGGLE ===== */
+  #matching-toggle-section {
+    background: var(--blue-deep);
+    padding: 20px 0;
+  }
+  .matching-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .matching-text { color: white; }
+  .matching-text h3 { font-size: 1.2rem; margin-bottom: 4px; }
+  .matching-text p { font-size: 0.85rem; opacity: 0.7; }
+  .toggle-switch {
+    position: relative; width: 60px; height: 30px;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .toggle-switch input { display: none; }
+  .toggle-slider {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.2);
+    border-radius: 30px;
+    transition: 0.3s;
+  }
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 24px; height: 24px;
+    left: 3px; top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  .toggle-switch input:checked + .toggle-slider { background: var(--gold-bright); }
+  .toggle-switch input:checked + .toggle-slider::before { transform: translateX(30px); }
+
+  /* ===== MILESTONES ===== */
+  .milestones-row {
+    display: flex; gap: 0;
+    align-items: stretch;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
+    max-width: 900px; margin: 0 auto;
+  }
+  .milestone-step {
+    flex: 1; text-align: center; padding: 24px 16px;
+    border-left: 1px solid var(--gray-200);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .milestone-step:last-child { border-left: none; }
+  .milestone-step.reached { background: var(--blue-deep); }
+  .milestone-step.reached .ms-pct { color: var(--gold-bright); }
+  .milestone-step.reached .ms-label { color: rgba(255,255,255,0.85); }
+  .milestone-step.reached .ms-icon { filter: grayscale(0); }
+  .ms-icon { font-size: 2rem; margin-bottom: 8px; filter: grayscale(0.7); }
+  .ms-pct {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--blue-deep);
+    margin-bottom: 4px;
+  }
+  .ms-label { font-size: 0.8rem; color: var(--text-secondary); }
+
+  /* ===== SHARE POPUP ===== */
+  #share-popup {
+    position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.6);
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  #share-popup.show { display: flex; }
+  .share-card {
+    background: white; border-radius: var(--radius);
+    padding: 40px; max-width: 420px; width: 90%;
+    text-align: center;
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  .share-card h3 { font-size: 1.5rem; color: var(--blue-deep); margin-bottom: 8px; }
+  .share-card p { color: var(--text-secondary); margin-bottom: 24px; font-size: 0.95rem; }
+  .share-btns { display: flex; flex-direction: column; gap: 10px; }
+  .share-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+  .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  .share-btn.whatsapp { background: #25D366; color: white; }
+  .share-btn.copy { background: var(--blue-soft); color: var(--blue-deep); }
+  .share-btn.facebook { background: #1877F2; color: white; }
+  .share-close {
+    margin-top: 16px;
+    font-size: 0.88rem;
+    color: var(--gray-400);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  /* ===== STICKY DONATE BTN ===== */
+  #sticky-donate {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 800;
+    display: none;
+  }
+  #sticky-donate.show { display: block; }
+  .sticky-inner {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--blue-deep);
+    border-radius: var(--radius-pill);
+    padding: 14px 28px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease-out;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .sticky-inner .amount-live {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 0.9rem; color: rgba(255,255,255,0.7);
+  }
+  .sticky-inner .amount-live strong { color: var(--gold-bright); font-size: 1rem; }
+  .sticky-btn {
+    background: var(--gold-bright);
+    color: var(--blue-deep);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    transition: all 0.2s;
+  }
+  .sticky-btn:hover { transform: scale(1.05); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    padding: 40px 20px;
+  }
+  footer h4 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+  footer p { font-size: 0.85rem; margin-bottom: 4px; }
+  .footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.6); font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-bright); }
+
+  /* ===== MILESTONE TOAST ===== */
+  .milestone-toast {
+    position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
+    z-index: 9500;
+    background: var(--gold-bright);
+    color: var(--blue-deep);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    padding: 16px 32px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-lg);
+    animation: toastIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both,
+               toastOut 0.4s ease 2.5s forwards;
+    display: none;
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(-50%) scale(0.5) translateY(-20px); }
+    to { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+  }
+  @keyframes toastOut {
+    to { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .hero-stats .stat-item:last-child { grid-column: 1 / -1; }
+    .story-grid { grid-template-columns: 1fr; }
+    .story-image-wrap { aspect-ratio: 16/9; }
+    .story-badge-img { display: none; }
+    .amount-presets { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .donation-body { padding: 24px 20px; }
+    .donation-header { padding: 24px 20px; }
+    .milestones-row { flex-direction: column; }
+    .milestone-step { border-left: none; border-bottom: 1px solid var(--gray-200); }
+    .nav-links { display: none; }
+    section { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="star">✡</span>
+      <span>בית הכנסת שלנו</span>
+    </div>
+    <div class="nav-links">
+      <a href="#story">הסיפור שלנו</a>
+      <a href="#leaderboard">לוח כבוד</a>
+      <a href="#families">שגרירי קמפיין</a>
+      <a href="admin.html">ניהול</a>
+      <a href="#donate" class="nav-donate">תרום עכשיו ✦</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MATCHING BANNER ===== -->
+<div id="matching-banner">
+  <span class="matching-icon">✦</span>
+  <span>כל תרומה מוכפלת! תורמים עכשיו ותרומתך מוכפלת פי 2</span>
+  <span class="matching-icon">✦</span>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-content container">
+    <div class="hero-badge">✡   בית הכנסת של יחדיו</div>
+    <h1 class="font-display">בונים יחדיו</h1>
+    <div class="hero-subtitle">
+      <p>בחודשים הקרובים נתחיל את תהליך בניית בית הכנסת.</p>
+      <p>אין ספק שמדובר בפרויקט הגדול ביותר של הקהילה, ומושקעים בו המון עבודה, זמן וכסף.</p>
+      <p>ברוך ה׳ הגענו לשלב בו אנחנו צריכים לקבל החלטות לגבי גודל המבנה והתכנון האדריכלי של בית הכנסת, ולכן חשוב לנו לדעת מי מחברי הקהילה מתכנן להיות איתנו ולהירתם למשימה (בתקווה שמדובר בכולם).</p>
+      <p>לשם כך אנחנו מבקשים מחברי הקהילה לחתום על מסמך ההצטרפות ולשלם 1,500 ש״ח כתשלום ראשוני, אותו ניתן לחלק למספר תשלומים.</p>
+      <p>מדובר בתשלום ראשוני מתוך הסכום אותו כל משפחה תתבקש לשלם או להתרים. (מדובר על כ-45 אלף ש"ח, אבל אל דאגה, אנחנו נלווה אתכם ונספק כלים מקצועיים לתהליך גיוס הכספים)</p>
+      <p>מטבע הדברים, ההוצאות משמעותיות, ולא נוכל לבקש ממשפחות לשאת בתשלום עבור אחרים. כל משפחה תשתתף בחלקה, ובית הכנסת יוקם בהתאם למספר הנרשמים.</p>
+      <p>חשוב לציין שמשפחות שיצטרפו, יבטיחו לעצמן זכויות שונות בבית הכנסת החדש.</p>
+      <p>כך למשל משפחות רשומות יוכלו להיות בטוחות שתמיד יהיה להן מקום בבית הכנסת שהן עצמן סייעו להקים, גם בחגים או במקרה שבית הכנסת לא יוכל להכיל את כל המתפללים שיבקשו להגיע מדי שבת.</p>
+      <p>משפחות שמעוניינות להצטרף אך זקוקות לסיוע בנושא הכספי מוזמנות לפנות לאסף וולמן באופן פרטי.</p>
+    </div>
+
+    <div class="hero-cta-row">
+      <a href="https://meshulam.co.il/quick_payment?b=d3f0b4bd675ed7aea60bccb887b2c146" class="btn-primary" target="_blank" rel="noopener">להצטרפות לבניית בית הכנסת</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>גלול למטה</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-image-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1576016770956-debb63d92058?w=800&q=80"
+          alt="בית הכנסת שלנו"
+          loading="lazy"
+        >
+        <div class="story-badge-img">
+          <span>40+</span>
+          <span>שנות</span>
+          <span>קהילה</span>
+        </div>
+      </div>
+      <div class="story-text">
+        <div class="section-tag">הסיפור שלנו</div>
+        <h2 class="font-display">למה אנחנו בונים?</h2>
+        <p>
+          <strong>קהילתנו גדלה.</strong> מה שהחל כמניין קטן של שלושים משפחות, גדל היום לקהילה תוססת של מאות משפחות — ועדיין אין לנו בית קבוע משלנו.
+        </p>
+        <p>
+          כל שבת, כל חג, כל שמחה — אנחנו שוכרים אולמות, מעמיסים ציוד, ומגיעים לפני כולם. הגיע הזמן שיהיה לנו <strong>בית אמיתי</strong> — מקום קדוש שיחכה לנו תמיד.
+        </p>
+        <p>
+          הבניין החדש יכלול: עזרת גברים ונשים מרווחת, חדרי לימוד, גן ילדים, וטרקלין קהילתי. מקום שהדורות הבאים יגדלו בו.
+        </p>
+        <div class="story-pillars">
+          <div class="pillar">
+            <span class="pillar-icon">🕍</span>
+            <div class="pillar-text">
+              <strong>עזרת תפילה</strong>
+              <span>300 מקומות ישיבה</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">📚</span>
+            <div class="pillar-text">
+              <strong>בית מדרש</strong>
+              <span>לימוד ותורה</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">👨‍👩‍👧‍👦</span>
+            <div class="pillar-text">
+              <strong>מרכז קהילתי</strong>
+              <span>לכל אירוע</span>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-icon">🌱</span>
+            <div class="pillar-text">
+              <strong>גן ילדים</strong>
+              <span>חינוך לדורות</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MILESTONES ===== -->
+<section style="background:var(--off-white);padding:60px 0;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">אבני דרך</div>
+      <h2 class="font-display">מה כבר השגנו</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="milestones-row" id="milestones-row">
+      <div class="milestone-step" data-pct="25">
+        <div class="ms-icon">🌱</div>
+        <div class="ms-pct">25%</div>
+        <div class="ms-label">תשתית</div>
+      </div>
+      <div class="milestone-step" data-pct="50">
+        <div class="ms-icon">🏗️</div>
+        <div class="ms-pct">50%</div>
+        <div class="ms-label">בנייה</div>
+      </div>
+      <div class="milestone-step" data-pct="75">
+        <div class="ms-icon">🏛️</div>
+        <div class="ms-pct">75%</div>
+        <div class="ms-label">גמר</div>
+      </div>
+      <div class="milestone-step" data-pct="100">
+        <div class="ms-icon">✡️</div>
+        <div class="ms-pct">100%</div>
+        <div class="ms-label">חנוכת הבית!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MATCHING TOGGLE ===== -->
+<div id="matching-toggle-section">
+  <div class="container matching-inner">
+    <div class="matching-text">
+      <h3>מצב כפל תרומות</h3>
+      <p>כשמופעל, כל תרומה מוכפלת על ידי תורם אנונימי</p>
+    </div>
+    <label class="toggle-switch">
+      <input type="checkbox" id="matching-toggle" onchange="toggleMatching(this.checked)">
+      <div class="toggle-slider"></div>
+    </label>
+  </div>
+</div>
+
+<!-- ===== DONATE ===== -->
+<section id="donate">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">תרומה</div>
+      <h2 class="font-display">תרמו עכשיו</h2>
+      <p>כל שקל מקרב אותנו לחלום. תרומתכם בונה עתיד.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="donation-card">
+      <div class="donation-header">
+        <h3 class="font-display">בחרו סכום תרומה</h3>
+        <p>תרומות מוכרות לצרכי מס | SSL מאובטח</p>
+        <span id="matching-active-label">✦ כל תרומה מוכפלת!</span>
+      </div>
+      <div class="donation-body">
+        <div class="amount-label">סכום תרומה (₪)</div>
+        <div class="amount-presets" id="amount-presets">
+          <button class="amount-btn" data-amount="180" onclick="selectAmount(180, this)">
+            ₪180
+            <span class="multiplied">×2 = ₪360</span>
+          </button>
+          <button class="amount-btn selected" data-amount="360" onclick="selectAmount(360, this)">
+            ₪360
+            <span class="multiplied">×2 = ₪720</span>
+          </button>
+          <button class="amount-btn" data-amount="1000" onclick="selectAmount(1000, this)">
+            ₪1,000
+            <span class="multiplied">×2 = ₪2,000</span>
+          </button>
+          <button class="amount-btn" data-amount="5000" onclick="selectAmount(5000, this)">
+            ₪5,000
+            <span class="multiplied">×2 = ₪10,000</span>
+          </button>
+        </div>
+        <div class="custom-amount-wrap">
+          <input
+            type="number"
+            id="custom-amount"
+            placeholder="סכום אחר (הכנס ידנית)"
+            min="10"
+            oninput="onCustomAmount(this.value)"
+          >
+          <span class="currency">₪</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>שם מלא</label>
+            <input type="text" id="donor-name" placeholder="ישראל ישראלי">
+          </div>
+          <div class="form-group">
+            <label>טלפון / אימייל</label>
+            <input type="text" id="donor-contact" placeholder="050-0000000">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:20px">
+          <label>הקדשה / לזכות מי (אופציונלי)</label>
+          <textarea id="donor-dedication" placeholder="לעילוי נשמת... / לרפואת... / לכבוד משפחת..."></textarea>
+        </div>
+
+        <div class="donate-total-display">
+          <span class="total-label" id="total-label-text">סכום תרומה:</span>
+          <span class="total-amount" id="donate-total-display">₪360</span>
+        </div>
+
+        <button class="donate-submit-btn" onclick="submitDonation()">
+          ✦ תרום ₪<span id="donate-btn-amount">360</span> עכשיו
+        </button>
+        <div class="security-note">
+          🔒 תשלום מאובטח | אתר זה הוא הדגמה בלבד — אין חיוב אמיתי
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAMILIES ===== -->
+<section id="families">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">שגרירי קמפיין</div>
+      <h2 class="font-display">משפחות שמובילות את הדרך</h2>
+      <p>כל משפחה לוקחת על עצמה יעד אישי ומגייסת לקמפיין. הצטרפו לאחת מהן!</p>
+      <div class="divider"></div>
+    </div>
+    <div class="families-grid" id="families-grid"></div>
+  </div>
+</section>
+
+<!-- ===== LEADERBOARD ===== -->
+<section id="leaderboard">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">לוח כבוד</div>
+      <h2 class="font-display">מי בראש הטבלה?</h2>
+      <p>הוקרה למשפחות שמובילות את המאמץ הגדול</p>
+      <div class="divider"></div>
+    </div>
+    <div class="leaderboard-list" id="leaderboard-list"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <h4 class="font-display">✡ בית הכנסת שלנו</h4>
+  <p>קמפיין לבניית בית קהילה לדורות</p>
+  <p style="margin-top:8px;font-size:0.8rem;opacity:0.5">אתר זה הוא הדגמה טכנית. כל פרטי התשלום הם לצורכי תצוגה בלבד.</p>
+  <div class="footer-links">
+    <a href="#story">הסיפור שלנו</a>
+    <a href="#donate">תרומה</a>
+    <a href="#leaderboard">לוח כבוד</a>
+    <a href="family.html?id=1">דוגמת דף משפחה</a>
+    <a href="admin.html">ניהול</a>
+  </div>
+</footer>
+
+<!-- ===== SUCCESS OVERLAY ===== -->
+<div id="success-overlay">
+  <div class="success-card">
+    <div class="success-icon">✦</div>
+    <h3 class="font-display">תודה רבה!</h3>
+    <p>תרומתך התקבלה בברכה. כל שקל מקרב אותנו לחלום הגדול שלנו.</p>
+    <div class="success-amount" id="success-amount-display">₪360</div>
+    <div class="success-actions">
+      <button class="btn-primary" onclick="openShare()">שתף את הקמפיין</button>
+      <button class="btn-secondary" onclick="closeSuccess()">חזור לקמפיין</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SHARE POPUP ===== -->
+<div id="share-popup">
+  <div class="share-card">
+    <h3 class="font-display">שתף את הקמפיין</h3>
+    <p>עזור לנו להגיע ליותר אנשים. כל שיתוף שווה!</p>
+    <div class="share-btns">
+      <button class="share-btn whatsapp" onclick="shareWhatsApp()">
+        📱 שתף בוואטסאפ
+      </button>
+      <button class="share-btn facebook" onclick="shareFacebook()">
+        👍 שתף בפייסבוק
+      </button>
+      <button class="share-btn copy" onclick="copyLink()">
+        🔗 העתק קישור
+      </button>
+    </div>
+    <div class="share-close" onclick="closeShare()">סגור</div>
+  </div>
+</div>
+
+<!-- ===== STICKY DONATE ===== -->
+<div id="sticky-donate">
+  <div class="sticky-inner">
+    <div class="amount-live">
+      סה"כ גויס: <strong id="sticky-raised">₪0</strong>
+    </div>
+    <button class="sticky-btn" onclick="document.getElementById('donate').scrollIntoView({behavior:'smooth'})">
+      תרום עכשיו ✦
+    </button>
+    <button style="color:rgba(255,255,255,0.5);font-size:1.2rem;margin-right:4px;" onclick="openShare()">↗</button>
+  </div>
+</div>
+
+<!-- ===== MILESTONE TOAST ===== -->
+<div class="milestone-toast" id="milestone-toast"></div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// =============================================
+//  DATA — Families JSON (hardcoded, editable via admin)
+// =============================================
+const DEFAULT_FAMILIES = [
+  { id: 1, name: "משפחת כהן", goal: 15000, raised: 9200, image: "https://images.unsplash.com/photo-1511895426328-dc8714191011?w=400&q=70", message: "הגיע הזמן שלקהילה שלנו יהיה בית אמיתי. אנחנו גאים להוביל את הדרך!" },
+  { id: 2, name: "משפחת לוי", goal: 12000, raised: 12000, image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=70", message: "מאמינים בכוח הקהילה. יחד נבנה משהו שיעמוד לנצח." },
+  { id: 3, name: "משפחת אברמוביץ", goal: 10000, raised: 7500, image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=70", message: "לכבוד ילדינו ונכדינו — שיהיה להם בית יהודי." },
+  { id: 4, name: "משפחת ברגר", goal: 20000, raised: 14000, image: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=400&q=70", message: "אנחנו חלק מהיסטוריה. כל תרומה חוצבת לנצח." },
+  { id: 5, name: "משפחת מזרחי", goal: 8000, raised: 3200, image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=70", message: "כל שקל שאתם תורמים דרכנו — גורם לנו גאווה עצומה." },
+  { id: 6, name: "משפחת פרידמן", goal: 25000, raised: 18500, image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&q=70", message: "בזכות תרומות כאלה נראה את בית הכנסת עולה לשמים." },
+];
+
+// Campaign config
+let CAMPAIGN = {
+  goal: 1500000,
+  endDate: new Date(Date.now() + 72 * 60 * 60 * 1000), // 72h from now
+  matchingActive: false,
+};
+
+// Load from localStorage if admin saved
+function loadData() {
+  const storedFamilies = localStorage.getItem('campaign_families');
+  const storedCampaign = localStorage.getItem('campaign_config');
+  if (storedFamilies) {
+    try { return { families: JSON.parse(storedFamilies), campaign: storedCampaign ? JSON.parse(storedCampaign) : CAMPAIGN }; }
+    catch(e) {}
+  }
+  return { families: DEFAULT_FAMILIES, campaign: CAMPAIGN };
+}
+
+let { families, campaign } = loadData();
+CAMPAIGN = campaign;
+
+// Analytics helper
+function track(event, data = {}) {
+  console.log(`[ANALYTICS] ${event}`, { timestamp: new Date().toISOString(), ...data });
+}
+
+// =============================================
+//  COMPUTED STATS
+// =============================================
+function getTotalRaised() {
+  return families.reduce((sum, f) => sum + f.raised, 0);
+}
+
+function getPct() {
+  return Math.min(100, Math.round((getTotalRaised() / CAMPAIGN.goal) * 100));
+}
+
+// =============================================
+//  INIT & RENDER
+// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+  createParticles();
+  renderHero();
+  renderFamilies();
+  renderLeaderboard();
+  startCountdown();
+  initScrollBehaviors();
+  checkMilestones(false);
+  track('page_view', { page: 'home' });
+});
+
+function renderHero() {
+  const raised = getTotalRaised();
+  const pct = getPct();
+
+  // Animated counter
+  animateCounter('hero-raised-counter', raised, '₪');
+  animateCounter('sticky-raised', raised, '₪');
+
+  // Progress bar (delayed for effect)
+  setTimeout(() => {
+    const bar = document.getElementById('hero-progress-bar');
+    if (bar) bar.style.width = pct + '%';
+    document.getElementById('hero-pct').textContent = pct + '%';
+    document.getElementById('hero-progress-label').textContent = `${pct}% מהיעד הושג`;
+  }, 400);
+
+  // Goal
+  document.getElementById('campaign-goal').textContent = '₪' + CAMPAIGN.goal.toLocaleString('he-IL');
+}
+
+function animateCounter(id, targetVal, prefix = '') {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let current = 0;
+  const increment = targetVal / 60;
+  const timer = setInterval(() => {
+    current = Math.min(current + increment, targetVal);
+    el.textContent = prefix + Math.floor(current).toLocaleString('he-IL');
+    if (current >= targetVal) clearInterval(timer);
+  }, 25);
+}
+
+// =============================================
+//  FAMILIES
+// =============================================
+function renderFamilies() {
+  const grid = document.getElementById('families-grid');
+  if (!grid) return;
+  grid.innerHTML = families.map(f => {
+    const pct = Math.min(100, Math.round((f.raised / f.goal) * 100));
+    return `
+      <div class="family-card" onclick="goToFamily(${f.id})">
+        <div class="family-card-img">
+          <img src="${f.image}" alt="${f.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=70'">
+          <span class="family-card-badge">${pct}% מהיעד</span>
+        </div>
+        <div class="family-card-body">
+          <div class="family-card-name">${f.name}</div>
+          <div class="family-card-msg">${f.message}</div>
+          <div class="family-progress-wrap">
+            <div class="family-progress-bar">
+              <div class="family-progress-fill" style="width:${pct}%"></div>
+            </div>
+            <div class="family-progress-stats">
+              <span class="raised">₪${f.raised.toLocaleString('he-IL')}</span>
+              <span>יעד: ₪${f.goal.toLocaleString('he-IL')}</span>
+            </div>
+          </div>
+          <a class="family-card-btn" href="family.html?id=${f.id}">לדף המשפחה ←</a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function goToFamily(id) {
+  window.location.href = `family.html?id=${id}`;
+}
+
+// =============================================
+//  LEADERBOARD
+// =============================================
+function renderLeaderboard() {
+  const list = document.getElementById('leaderboard-list');
+  if (!list) return;
+  const sorted = [...families].sort((a, b) => b.raised - a.raised);
+  const medals = ['🥇', '🥈', '🥉'];
+
+  list.innerHTML = sorted.map((f, i) => {
+    const rank = i + 1;
+    const pct = Math.min(100, Math.round((f.raised / f.goal) * 100));
+    const cls = rank <= 3 ? `top-${rank}` : '';
+    return `
+      <div class="lb-item ${cls}" onclick="goToFamily(${f.id})" style="cursor:pointer">
+        <div class="lb-rank">${rank <= 3 ? '<span class="medal">' + medals[i] + '</span>' : '#' + rank}</div>
+        <img class="lb-avatar" src="${f.image}" alt="${f.name}" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=70'">
+        <div class="lb-info">
+          <div class="lb-name">${f.name}</div>
+          <div class="lb-bar-outer">
+            <div class="lb-bar-inner" style="width:${pct}%"></div>
+          </div>
+        </div>
+        <div class="lb-amount">₪${f.raised.toLocaleString('he-IL')}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// =============================================
+//  DONATION LOGIC
+// =============================================
+let selectedAmount = 360;
+let matchingActive = CAMPAIGN.matchingActive || false;
+
+// Apply matching state on load
+if (matchingActive) {
+  document.getElementById('matching-toggle').checked = true;
+  applyMatching(true);
+}
+
+function selectAmount(amount, btn) {
+  selectedAmount = amount;
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('custom-amount').value = '';
+  updateDonateDisplay();
+}
+
+function onCustomAmount(val) {
+  if (val && parseInt(val) > 0) {
+    selectedAmount = parseInt(val);
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    updateDonateDisplay();
+  }
+}
+
+function updateDonateDisplay() {
+  const effective = matchingActive ? selectedAmount * 2 : selectedAmount;
+  const display = matchingActive
+    ? `₪${selectedAmount.toLocaleString('he-IL')} × 2 = ₪${(selectedAmount * 2).toLocaleString('he-IL')}`
+    : `₪${selectedAmount.toLocaleString('he-IL')}`;
+  document.getElementById('donate-total-display').textContent = display;
+  document.getElementById('donate-btn-amount').textContent = selectedAmount.toLocaleString('he-IL');
+}
+
+function toggleMatching(active) {
+  matchingActive = active;
+  CAMPAIGN.matchingActive = active;
+  localStorage.setItem('campaign_config', JSON.stringify(CAMPAIGN));
+  applyMatching(active);
+  track('matching_toggled', { active });
+}
+
+function applyMatching(active) {
+  // Banner
+  const banner = document.getElementById('matching-banner');
+  if (active) banner.classList.add('active'); else banner.classList.remove('active');
+
+  // Label in donation card
+  const lbl = document.getElementById('matching-active-label');
+  if (active) lbl.classList.add('show'); else lbl.classList.remove('show');
+
+  // Preset badges
+  document.querySelectorAll('.amount-btn .multiplied').forEach(el => {
+    if (active) el.classList.add('show'); else el.classList.remove('show');
+  });
+
+  updateDonateDisplay();
+}
+
+function submitDonation() {
+  const name = document.getElementById('donor-name').value.trim() || 'תורם אנונימי';
+  const dedication = document.getElementById('donor-dedication').value.trim();
+  const effectiveAmount = matchingActive ? selectedAmount * 2 : selectedAmount;
+
+  if (selectedAmount < 10) {
+    alert('אנא הכנס סכום תרומה תקין (מינימום ₪10)');
+    return;
+  }
+
+  // Simulate adding to campaign total
+  families[0].raised = Math.min(families[0].goal, families[0].raised + selectedAmount);
+  localStorage.setItem('campaign_families', JSON.stringify(families));
+
+  // Show success
+  document.getElementById('success-amount-display').textContent =
+    `₪${effectiveAmount.toLocaleString('he-IL')}`;
+
+  document.getElementById('success-overlay').classList.add('show');
+
+  // Update totals
+  renderHero();
+  renderLeaderboard();
+  renderFamilies();
+  checkMilestones(true);
+
+  track('donation_completed', {
+    name,
+    amount: selectedAmount,
+    effectiveAmount,
+    matching: matchingActive,
+    dedication,
+  });
+
+  // Sound effect (tone)
+  playSuccessSound();
+}
+
+function closeSuccess() {
+  document.getElementById('success-overlay').classList.remove('show');
+}
+
+// =============================================
+//  SOUND
+// =============================================
+function playSuccessSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523, 659, 784, 1047];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      osc.type = 'sine';
+      const start = ctx.currentTime + i * 0.15;
+      gain.gain.setValueAtTime(0.15, start);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + 0.4);
+      osc.start(start);
+      osc.stop(start + 0.4);
+    });
+  } catch(e) {}
+}
+
+// =============================================
+//  MILESTONES
+// =============================================
+function checkMilestones(animate) {
+  const pct = getPct();
+  const steps = document.querySelectorAll('.milestone-step');
+  steps.forEach(step => {
+    const threshold = parseInt(step.dataset.pct);
+    if (pct >= threshold) {
+      step.classList.add('reached');
+      if (animate) showMilestoneToast(threshold);
+    }
+  });
+}
+
+function showMilestoneToast(pct) {
+  const messages = {
+    25: '🌱 הגענו ל-25%! ממשיכים קדימה!',
+    50: '🏗️ חצי הדרך! 50% הושג!',
+    75: '🏛️ 75%! כמעט הגענו!',
+    100: '✡️ הגענו ל-100%! מזל טוב!',
+  };
+  const toast = document.getElementById('milestone-toast');
+  toast.textContent = messages[pct] || '';
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 3200);
+}
+
+// =============================================
+//  COUNTDOWN
+// =============================================
+function startCountdown() {
+  function update() {
+    const now = Date.now();
+    const end = new Date(CAMPAIGN.endDate).getTime();
+    let diff = Math.max(0, Math.floor((end - now) / 1000));
+    const d = Math.floor(diff / 86400); diff -= d * 86400;
+    const h = Math.floor(diff / 3600); diff -= h * 3600;
+    const m = Math.floor(diff / 60);
+    const s = diff % 60;
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+}
+
+// =============================================
+//  SHARE
+// =============================================
+function openShare() { document.getElementById('share-popup').classList.add('show'); track('share_popup_open'); }
+function closeShare() { document.getElementById('share-popup').classList.remove('show'); }
+
+function shareWhatsApp() {
+  const text = `🕍 אני חלק מקמפיין לבניית בית הכנסת שלנו! כבר גייסנו ₪${getTotalRaised().toLocaleString('he-IL')} מתוך ₪${CAMPAIGN.goal.toLocaleString('he-IL')}. הצטרפו אלינו ותרמו: ${window.location.href}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+  track('share', { channel: 'whatsapp' });
+}
+
+function shareFacebook() {
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`);
+  track('share', { channel: 'facebook' });
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('הקישור הועתק! שתפו אותו עם כולם.');
+    track('share', { channel: 'copy' });
+  });
+}
+
+// =============================================
+//  SCROLL BEHAVIORS
+// =============================================
+function initScrollBehaviors() {
+  const navbar = document.getElementById('navbar');
+  const sticky = document.getElementById('sticky-donate');
+  const donateSection = document.getElementById('donate');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    // Navbar
+    if (y > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+    // Sticky button (show after hero)
+    const heroBottom = document.getElementById('hero').offsetHeight;
+    if (y > heroBottom) sticky.classList.add('show'); else sticky.classList.remove('show');
+    // Update sticky raised
+    document.getElementById('sticky-raised').textContent = '₪' + getTotalRaised().toLocaleString('he-IL');
+    // Flashing progress near goal
+    const pct = getPct();
+    const bar = document.getElementById('hero-progress-bar');
+    if (bar && pct >= 90 && pct < 100) {
+      bar.style.animation = 'shimmer 0.8s ease-in-out infinite';
+    }
+  });
+}
+
+// =============================================
+//  PARTICLES
+// =============================================
+function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${Math.random() * 4 + 2}px;
+      height: ${Math.random() * 4 + 2}px;
+      animation-duration: ${Math.random() * 15 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(p);
+  }
+}
+</script>
+</body>
+</html>
