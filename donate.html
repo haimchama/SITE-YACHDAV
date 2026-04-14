@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>בניית בית הכנסת | Build Our Synagogue | Construir Nuestra Sinagoga</title>
+<meta name="description" content="קמפיין תרומה לבניית בית הכנסת. Donation campaign to build our synagogue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;500;700&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --blue-deep: #0D2B5E;
+  --blue-mid: #1A4FA0;
+  --blue-light: #2E73CC;
+  --blue-soft: #D6E8FF;
+  --gold: #C8920A;
+  --gold-bright: #F5B418;
+  --gold-light: #FFF3CC;
+  --orange: #E05C1A;
+  --white: #FFFFFF;
+  --off-white: #FAF8F4;
+  --gray-100: #F4F2EE;
+  --gray-200: #E8E4DC;
+  --gray-400: #A09585;
+  --gray-600: #6B5E50;
+  --text-primary: #1A0F00;
+  --text-secondary: #5A4A38;
+  --shadow-sm: 0 2px 8px rgba(13,43,94,0.08);
+  --shadow-md: 0 8px 32px rgba(13,43,94,0.14);
+  --shadow-lg: 0 20px 60px rgba(13,43,94,0.2);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-pill: 100px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--off-white);
+  color: var(--text-primary);
+  direction: rtl;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+a { text-decoration: none; color: inherit; }
+
+/* Language direction control */
+body.lang-en, body.lang-es { direction: ltr; }
+body.lang-en .hero-subtitle, body.lang-es .hero-subtitle { text-align: left; }
+body.lang-en .story-text p, body.lang-es .story-text p { text-align: left; }
+body.lang-he { font-family: 'Heebo', sans-serif; }
+body.lang-en { font-family: 'Lato', sans-serif; }
+body.lang-es { font-family: 'Lato', sans-serif; }
+body.lang-en h1, body.lang-en h2, body.lang-en h3,
+body.lang-es h1, body.lang-es h2, body.lang-es h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3 { font-family: 'Frank Ruhl Libre', serif; line-height: 1.2; }
+.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+/* ===== LANG SWITCHER ===== */
+.lang-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1100;
+  background: rgba(5, 16, 45, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(245,180,24,0.2);
+  padding: 0 20px;
+  height: 44px;
+  display: flex; align-items: center; justify-content: flex-end;
+}
+body.lang-en .lang-bar, body.lang-es .lang-bar { justify-content: flex-start; }
+.lang-bar-inner {
+  display: flex; align-items: center; gap: 6px;
+  max-width: 1140px; width: 100%;
+  justify-content: flex-end;
+}
+body.lang-en .lang-bar-inner, body.lang-es .lang-bar-inner { justify-content: flex-start; }
+.lang-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+  background: transparent;
+  border: 1px solid transparent;
+}
+.lang-btn .flag { font-size: 1.1rem; line-height: 1; }
+.lang-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+.lang-btn.active {
+  color: var(--gold-bright);
+  background: rgba(245,180,24,0.12);
+  border-color: rgba(245,180,24,0.3);
+}
+.lang-divider {
+  width: 1px; height: 16px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ===== NAVBAR ===== */
+#navbar {
+  position: fixed; top: 44px; left: 0; right: 0; z-index: 1000;
+  transition: background 0.2s, box-shadow 0.2s;
+  padding: 0 20px;
+}
+#navbar.scrolled {
+  background: var(--blue-deep);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.nav-inner {
+  max-width: 1140px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: white;
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-logo .menorah { font-size: 1.8rem; }
+.nav-name { display: flex; flex-direction: column; line-height: 1.2; }
+.nav-name .top { font-size: 0.72rem; color: var(--gold-bright); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+.nav-name .main { font-size: 1.1rem; font-weight: 900; }
+
+.nav-donate-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold-bright);
+  color: var(--blue-deep);
+  font-weight: 900;
+  font-size: 0.9rem;
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(245,180,24,0.4);
+}
+.nav-donate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,180,24,0.5); background: white; }
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: #050f20;
+  padding-top: 116px;
+}
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+
+/* Ken Burns Slideshow */
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+/* Gradient backgrounds as placeholder for actual images */
+.hero-slide:nth-child(1) {
+  background-image: linear-gradient(135deg, #0D2B5E 0%, #1A4FA0 30%, #2E73CC 60%, #0D2B5E 100%);
+  animation: kbZoomIn 32s ease-in-out infinite 0s;
+}
+.hero-slide:nth-child(2) {
+  background-image: linear-gradient(135deg, #1a0a00 0%, #3d1c00 40%, #8B4513 70%, #0D2B5E 100%);
+  animation: kbZoomOut 32s ease-in-out infinite 8s;
+}
+.hero-slide:nth-child(3) {
+  background-image: linear-gradient(135deg, #0a1a3d 0%, #0D2B5E 50%, #1a3a6e 100%);
+  animation: kbPanLeft 32s ease-in-out infinite 16s;
+}
+.hero-slide:nth-child(4) {
+  background-image: linear-gradient(135deg, #2a1500 0%, #0D2B5E 50%, #1A4FA0 100%);
+  animation: kbPanRight 32s ease-in-out infinite 24s;
+}
+/* Overlay pattern to simulate synagogue texture */
+.hero-slide::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(245,180,24,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(200,146,10,0.04) 0%, transparent 50%);
+}
+
+@keyframes kbZoomIn {
+  0%   { opacity: 0; transform: scale(1.0); }
+  5%   { opacity: 1; }
+  22%  { opacity: 1; transform: scale(1.09); }
+  27%  { opacity: 0; transform: scale(1.11); }
+  100% { opacity: 0; }
+}
+@keyframes kbZoomOut {
+  0%   { opacity: 0; transform: scale(1.12); }
+  5%   { opacity: 1; }
+  22%  { opacity: 1; transform: scale(1.03); }
+  27%  { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.12); }
+}
+@keyframes kbPanLeft {
+  0%   { opacity: 0; transform: scale(1.1) translateX(4%); }
+  5%   { opacity: 1; }
+  22%  { opacity: 1; transform: scale(1.05) translateX(-1%); }
+  27%  { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.1) translateX(4%); }
+}
+@keyframes kbPanRight {
+  0%   { opacity: 0; transform: scale(1.1) translateX(-4%); }
+  5%   { opacity: 1; }
+  22%  { opacity: 1; transform: scale(1.05) translateX(1%); }
+  27%  { opacity: 0; }
+  100% { opacity: 0; transform: scale(1.1) translateX(-4%); }
+}
+
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(5,16,45,0.88) 0%,
+    rgba(8,24,60,0.3) 38%,
+    rgba(5,16,45,0.95) 100%);
+  pointer-events: none;
+}
+.hero-vignette {
+  position: absolute; inset: 0; z-index: 2;
+  background: radial-gradient(ellipse 130% 110% at 50% 45%,
+    transparent 22%, rgba(2,8,28,0.72) 100%);
+  pointer-events: none;
+}
+.hero-gold-glow {
+  position: absolute; inset: 0; z-index: 3;
+  background: radial-gradient(ellipse 60% 40% at 50% 50%,
+    rgba(200,146,10,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Floating particles */
+.hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3; }
+.particle {
+  position: absolute;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.5; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+
+.hero-content {
+  position: relative; z-index: 5;
+  text-align: center;
+  color: white;
+  max-width: 900px;
+  padding: 40px 20px 80px;
+  animation: fadeUp 1s ease-out both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(245,180,24,0.18);
+  border: 1px solid rgba(245,180,24,0.45);
+  color: var(--gold-bright);
+  font-size: 0.82rem; font-weight: 700;
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 22px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Star of David decoration */
+.hero-star {
+  font-size: 3.5rem;
+  display: block;
+  margin: 0 auto 16px;
+  animation: starGlow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(245,180,24,0.6));
+}
+@keyframes starGlow {
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(245,180,24,0.5)); }
+  50%       { filter: drop-shadow(0 0 35px rgba(245,180,24,0.9)); }
+}
+
+#hero h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 40px;
+  font-weight: 300;
+  line-height: 1.85;
+  max-width: 700px; margin-left: auto; margin-right: auto;
+  text-align: right;
+}
+.hero-subtitle p { margin-bottom: 14px; }
+.hero-subtitle p:last-child { margin-bottom: 0; }
+
+/* Progress box */
+.hero-progress-box {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: var(--radius);
+  padding: 26px 32px;
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto; margin-right: auto;
+}
+.progress-bar-outer {
+  height: 14px;
+  background: rgba(255,255,255,0.14);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.progress-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-bright) 100%);
+  border-radius: var(--radius-pill);
+  width: 0%;
+  transition: width 2.5s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+.progress-bar-inner::after {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 24px; height: 100%;
+  background: rgba(255,255,255,0.45);
+  animation: shimmer 2s ease-in-out infinite;
+  border-radius: var(--radius-pill);
+}
+@keyframes shimmer { 0%,100%{opacity:0;} 50%{opacity:1;} }
+.progress-label {
+  display: flex; justify-content: space-between; align-items: center;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.82rem;
+}
+.progress-label .pct { color: var(--gold-bright); font-weight: 700; font-size: 0.92rem; }
+
+/* CTA Button */
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  color: var(--blue-deep);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  padding: 18px 50px;
+  border-radius: var(--radius-pill);
+  transition: all 0.25s;
+  box-shadow: 0 6px 28px rgba(245,180,24,0.5);
+  margin-bottom: 18px;
+  animation: pulseBtn 3s ease-in-out infinite;
+}
+@keyframes pulseBtn {
+  0%,100% { box-shadow: 0 6px 28px rgba(245,180,24,0.5); }
+  50%      { box-shadow: 0 10px 40px rgba(245,180,24,0.8); }
+}
+.hero-cta:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 40px rgba(245,180,24,0.65); background: white; }
+.hero-cta:active { transform: translateY(0); }
+.hero-cta .arrow { font-size: 1.2rem; transition: transform 0.2s; }
+.hero-cta:hover .arrow { transform: translateX(4px); }
+
+.hero-scroll {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  z-index: 5;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.75rem;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+.hero-scroll .arrow { width: 18px; height: 18px; border-bottom: 2px solid rgba(255,255,255,0.35); border-right: 2px solid rgba(255,255,255,0.35); transform: rotate(45deg); }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(8px);} }
+
+/* ===== URGENCY BANNER ===== */
+.urgency-banner {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--gold) 100%);
+  color: white;
+  text-align: center;
+  padding: 13px 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: wrap;
+}
+.urgency-banner .pulse { animation: pulse 1.4s ease-in-out infinite; display: inline-block; }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.25);} }
+
+/* ===== SECTIONS ===== */
+section { padding: 88px 0; }
+.section-header { text-align: center; margin-bottom: 54px; }
+.section-tag {
+  display: inline-block;
+  background: var(--blue-soft);
+  color: var(--blue-mid);
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 12px;
+}
+.section-header h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--blue-deep);
+  margin-bottom: 14px;
+}
+.section-header p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 540px; margin: 0 auto;
+  line-height: 1.75;
+}
+.divider {
+  width: 56px; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  border-radius: 2px;
+  margin: 14px auto 0;
+}
+
+/* ===== STORY SECTION ===== */
+#story { background: white; }
+.story-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+}
+.story-visual {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: visible;
+}
+.story-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 40%, #3a6fd8 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.story-img-placeholder::before {
+  content: '✡';
+  font-size: 6rem;
+  color: rgba(245,180,24,0.25);
+  position: absolute;
+}
+.story-img-placeholder .upload-prompt {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.55);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 10px;
+}
+.story-badge-float {
+  position: absolute; bottom: -18px; right: -18px;
+  width: 90px; height: 90px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border: 4px solid white;
+  box-shadow: var(--shadow-md);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 900; color: var(--blue-deep);
+  line-height: 1;
+  z-index: 2;
+}
+body.lang-en .story-badge-float, body.lang-es .story-badge-float { left: -18px; right: auto; }
+.story-badge-float span:first-child { font-size: 1.6rem; }
+.story-badge-float span:last-child { font-size: 0.65rem; }
+
+.story-text h2 { font-size: 2.1rem; color: var(--blue-deep); margin-bottom: 20px; }
+.story-text p { color: var(--text-secondary); line-height: 1.85; margin-bottom: 16px; font-size: 1.02rem; }
+.story-text p strong { color: var(--blue-deep); font-weight: 700; }
+
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 26px; }
+.pillar {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 13px; background: var(--off-white);
+  border-radius: var(--radius-sm);
+  border-right: 3px solid var(--gold);
+}
+body.lang-en .pillar, body.lang-es .pillar { border-right: none; border-left: 3px solid var(--gold); }
+.pillar-icon { font-size: 1.3rem; flex-shrink: 0; }
+.pillar-text strong { display: block; font-size: 0.88rem; color: var(--blue-deep); font-weight: 700; }
+.pillar-text span { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* ===== DONATE SECTION ===== */
+#donate { background: var(--off-white); }
+.donation-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  max-width: 760px; margin: 0 auto;
+}
+.donation-header {
+  background: linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
+  padding: 28px 38px;
+  color: white; text-align: center;
+}
+.donation-header h3 { font-size: 1.65rem; margin-bottom: 6px; }
+.donation-header p { font-size: 0.92rem; opacity: 0.8; }
+.donation-body { padding: 34px 38px; }
+
+.amount-label { font-weight: 700; font-size: 0.95rem; color: var(--blue-deep); margin-bottom: 14px; }
+.amount-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.amount-btn {
+  padding: 13px 8px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--blue-deep);
+  background: var(--off-white);
+  transition: all 0.2s;
+}
+.amount-btn:hover { border-color: var(--blue-mid); background: var(--blue-soft); }
+.amount-btn.selected { border-color: var(--blue-mid); background: var(--blue-mid); color: white; }
+
+.custom-amount-wrap { position: relative; margin-bottom: 24px; }
+.custom-amount-wrap input {
+  width: 100%; padding: 12px 44px 12px 16px;
+  border: 2px solid var(--gray-200); border-radius: var(--radius-sm);
+  font-size: 1rem; font-family: 'Heebo', sans-serif;
+  color: var(--text-primary); background: var(--off-white);
+  transition: border-color 0.2s;
+}
+.custom-amount-wrap input:focus { outline: none; border-color: var(--blue-mid); background: white; }
+.custom-amount-wrap .currency {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  font-weight: 700; color: var(--gray-600);
+}
+body.lang-en .custom-amount-wrap .currency, body.lang-es .custom-amount-wrap .currency { left: auto; right: 14px; }
+
+.donate-total-box {
+  background: var(--gold-light);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.donate-total-box .total-label { font-size: 0.88rem; color: var(--gold); font-weight: 600; }
+.donate-total-box .total-amount { font-family: 'Frank Ruhl Libre', serif; font-size: 1.7rem; font-weight: 900; color: var(--blue-deep); }
+
+.donate-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+  color: var(--blue-deep);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 1.28rem; font-weight: 900;
+  padding: 17px;
+  border-radius: var(--radius-sm);
+  transition: all 0.22s;
+  box-shadow: 0 4px 20px rgba(245,180,24,0.35);
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.donate-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,180,24,0.55); }
+.donate-submit-btn:active { transform: translateY(0); }
+
+.security-note {
+  text-align: center; margin-top: 12px;
+  font-size: 0.8rem; color: var(--gray-400);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+
+/* ===== WHY SECTION ===== */
+#why { background: white; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.why-card {
+  background: var(--off-white);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  text-align: center;
+  border: 1px solid var(--gray-200);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.why-icon { font-size: 2.8rem; margin-bottom: 16px; }
+.why-card h3 { font-size: 1.2rem; color: var(--blue-deep); margin-bottom: 10px; }
+.why-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+
+/* ===== MILESTONES ===== */
+#milestones { background: var(--blue-deep); }
+#milestones .section-tag { background: rgba(245,180,24,0.15); color: var(--gold-bright); }
+#milestones .section-header h2 { color: white; }
+#milestones .section-header p { color: rgba(255,255,255,0.7); }
+.milestones-row {
+  display: flex; gap: 0;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-width: 880px; margin: 0 auto;
+}
+.milestone-step {
+  flex: 1; text-align: center; padding: 22px 14px;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s;
+}
+body.lang-en .milestone-step, body.lang-es .milestone-step { border-left: none; border-right: 1px solid rgba(255,255,255,0.08); }
+.milestone-step:first-child { border-left: none; }
+body.lang-en .milestone-step:first-child, body.lang-es .milestone-step:first-child { border-right: none; }
+.milestone-step.reached { background: rgba(245,180,24,0.12); }
+.ms-icon { font-size: 1.9rem; margin-bottom: 8px; filter: grayscale(0.6); transition: filter 0.3s; }
+.milestone-step.reached .ms-icon { filter: grayscale(0); }
+.ms-pct { font-family: 'Frank Ruhl Libre', serif; font-size: 1.5rem; font-weight: 900; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+.milestone-step.reached .ms-pct { color: var(--gold-bright); }
+.ms-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+.milestone-step.reached .ms-label { color: rgba(255,255,255,0.8); }
+
+/* ===== GALLERY ===== */
+#gallery { background: var(--off-white); overflow: hidden; }
+.gallery-track-wrap { overflow: hidden; position: relative; }
+.gallery-track-wrap::before, .gallery-track-wrap::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+  pointer-events: none;
+}
+.gallery-track-wrap::before { left: 0; background: linear-gradient(to right, var(--off-white), transparent); }
+.gallery-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--off-white), transparent); }
+.gallery-track {
+  display: flex; gap: 20px;
+  width: max-content;
+  animation: scrollGallery 30s linear infinite;
+}
+.gallery-track:hover { animation-play-state: paused; }
+@keyframes scrollGallery {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.gallery-item {
+  width: 300px; height: 200px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  cursor: pointer;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+}
+.gallery-item:hover .gallery-img { transform: scale(1.06); }
+.gallery-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px;
+  background: var(--gray-200);
+  color: var(--gray-400);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 10px;
+}
+.gallery-placeholder .icon { font-size: 2.2rem; }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: rgba(13,43,94,0.5);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+  color: white;
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 0.9rem; font-weight: 700;
+  text-align: center;
+  padding: 16px;
+}
+
+/* Gallery color themes */
+.gallery-item:nth-child(1) .gallery-placeholder { background: linear-gradient(135deg, #1A4FA0, #2E73CC); color: rgba(255,255,255,0.6); }
+.gallery-item:nth-child(2) .gallery-placeholder { background: linear-gradient(135deg, #C8920A, #F5B418); color: rgba(255,255,255,0.7); }
+.gallery-item:nth-child(3) .gallery-placeholder { background: linear-gradient(135deg, #0D2B5E, #1A4FA0); color: rgba(255,255,255,0.6); }
+.gallery-item:nth-child(4) .gallery-placeholder { background: linear-gradient(135deg, #5A3A1A, #8B5E2A); color: rgba(255,255,255,0.65); }
+.gallery-item:nth-child(5) .gallery-placeholder { background: linear-gradient(135deg, #2E73CC, #1A4FA0); color: rgba(255,255,255,0.6); }
+.gallery-item:nth-child(6) .gallery-placeholder { background: linear-gradient(135deg, #F5B418, #C8920A); color: rgba(255,255,255,0.7); }
+.gallery-add-note {
+  text-align: center; margin-top: 22px;
+  font-size: 0.85rem; color: var(--gray-400);
+}
+
+/* ===== TESTIMONIALS ===== */
+#testimonials { background: white; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.testi-card {
+  background: var(--off-white);
+  border-radius: var(--radius);
+  padding: 26px;
+  border: 1px solid var(--gray-200);
+  position: relative;
+}
+.testi-quote { font-size: 3rem; color: var(--gold-bright); line-height: 1; margin-bottom: 12px; font-family: serif; }
+.testi-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--blue-mid);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 1.1rem;
+  font-family: 'Frank Ruhl Libre', serif;
+  flex-shrink: 0;
+}
+.testi-name { font-weight: 700; color: var(--blue-deep); font-size: 0.92rem; }
+.testi-role { font-size: 0.78rem; color: var(--gray-400); }
+
+/* ===== BOTTOM CTA ===== */
+#bottom-cta { background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 100%); text-align: center; padding: 80px 20px; }
+#bottom-cta h2 { font-size: clamp(2rem, 4vw, 3rem); color: white; margin-bottom: 16px; }
+#bottom-cta p { font-size: 1.1rem; color: rgba(255,255,255,0.78); margin-bottom: 36px; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+
+/* ===== SHARE SECTION ===== */
+.share-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.share-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 700; font-size: 0.88rem;
+  transition: all 0.2s;
+}
+.share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+.share-btn.whatsapp { background: #25D366; color: white; }
+.share-btn.facebook { background: #1877F2; color: white; }
+.share-btn.copy { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+.share-btn.copy:hover { background: rgba(255,255,255,0.25); }
+
+/* ===== STICKY BUTTON ===== */
+#sticky-donate {
+  position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+  z-index: 900; display: none;
+}
+#sticky-donate.show { display: block; }
+.sticky-inner {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--blue-deep);
+  border-radius: var(--radius-pill);
+  padding: 13px 26px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+.sticky-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+.sticky-donate-btn {
+  background: var(--gold-bright); color: var(--blue-deep);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 900; font-size: 0.95rem;
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s;
+}
+.sticky-donate-btn:hover { transform: scale(1.05); background: white; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--blue-deep);
+  color: rgba(255,255,255,0.65);
+  text-align: center;
+  padding: 44px 20px 28px;
+}
+.footer-star { font-size: 2.4rem; margin-bottom: 10px; display: block; color: var(--gold-bright); }
+footer h4 { font-family: 'Frank Ruhl Libre', serif; font-size: 1.3rem; color: white; margin-bottom: 8px; }
+footer p { font-size: 0.83rem; margin-bottom: 4px; }
+.footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,0.5); font-size: 0.82rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold-bright); }
+.footer-divider { width: 50px; height: 2px; background: rgba(245,180,24,0.4); margin: 18px auto; border-radius: 2px; }
+
+/* ===== SUCCESS OVERLAY ===== */
+#success-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(10,25,58,0.88);
+  display: none; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+}
+#success-overlay.show { display: flex; }
+.success-card {
+  background: white; border-radius: var(--radius);
+  padding: 48px 56px; text-align: center;
+  max-width: 460px; width: 92%;
+  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn { from{opacity:0;transform:scale(0.6);} to{opacity:1;transform:scale(1);} }
+.success-icon { width: 84px; height: 84px; background: var(--gold-bright); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; margin: 0 auto 22px; animation: spinIn 0.5s ease-out 0.3s both; }
+@keyframes spinIn { from{transform:rotate(-180deg) scale(0);} to{transform:rotate(0) scale(1);} }
+.success-card h3 { font-size: 1.9rem; color: var(--blue-deep); margin-bottom: 8px; }
+.success-card p { color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+.success-close {
+  background: var(--blue-mid); color: white;
+  padding: 11px 28px; border-radius: var(--radius-pill);
+  font-weight: 700; font-size: 0.95rem;
+  transition: all 0.2s;
+}
+.success-close:hover { background: var(--blue-deep); }
+
+/* ===== MILESTONE TOAST ===== */
+.milestone-toast {
+  position: fixed; top: 130px; left: 50%; transform: translateX(-50%);
+  z-index: 9500;
+  background: var(--gold-bright); color: var(--blue-deep);
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 900; font-size: 1.1rem;
+  padding: 14px 30px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-lg);
+  display: none;
+  animation: toastIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes toastIn { from{opacity:0;transform:translateX(-50%) scale(0.5);} to{opacity:1;transform:translateX(-50%) scale(1);} }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .why-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+}
+@media (max-width: 768px) {
+  .story-grid { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .amount-presets { grid-template-columns: repeat(2, 1fr); }
+  .donation-body { padding: 22px 18px; }
+  .donation-header { padding: 22px 18px; }
+  .milestones-row { flex-direction: column; }
+  .milestone-step { border-left: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  body.lang-en .milestone-step, body.lang-es .milestone-step { border-right: none; }
+  section { padding: 60px 0; }
+  .success-card { padding: 32px 24px; }
+  .lang-btn .lang-name { display: none; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .share-row { flex-direction: column; }
+}
+</style>
+</head>
+<body class="lang-he">
+
+<!-- ===== LANGUAGE BAR ===== -->
+<div class="lang-bar">
+  <div class="lang-bar-inner">
+    <button class="lang-btn active" onclick="setLang('he')" id="btn-he">
+      <span class="flag">🇮🇱</span>
+      <span class="lang-name">עברית</span>
+    </button>
+    <span class="lang-divider"></span>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">
+      <span class="flag">🇺🇸</span>
+      <span class="lang-name">English</span>
+    </button>
+    <span class="lang-divider"></span>
+    <button class="lang-btn" onclick="setLang('es')" id="btn-es">
+      <span class="flag">🇪🇸</span>
+      <span class="lang-name">Español</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="menorah">🕍</span>
+      <div class="nav-name">
+        <span class="top" id="nav-tag">קמפיין תרומה</span>
+        <span class="main" id="nav-title">בית הכנסת שלנו</span>
+      </div>
+    </div>
+    <a href="https://meshulam.co.il/quick_payment?b=0d4d449fe13b4c1a6b294ebb5eb351f6" target="_blank" class="nav-donate-btn" id="nav-donate-btn">
+      ❤️ <span id="nav-btn-text">לתרומה לחץ כאן</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ===== URGENCY BANNER ===== -->
+<div class="urgency-banner" style="margin-top: 116px;">
+  <span class="pulse" id="urgency-icon">🔥</span>
+  <span id="urgency-text">הצטרפו אלינו! כל תרומה בונה עתיד. יחד נגשים את החלום!</span>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-gold-glow"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span>✦</span>
+      <span id="hero-badge-text">קמפיין גיוס כספים</span>
+    </div>
+    <span class="hero-star">✡️</span>
+    <h1 id="hero-h1">נבנה יחד את<br>בית הכנסת שלנו</h1>
+    <div class="hero-subtitle" id="hero-subtitle">
+      <p>קהילתנו חולמת על בית תפילה משלה – מקום שיחבר לבבות, ישמר מסורת ויהיה ביתם של כל בני הקהילה.</p>
+      <p><strong>כל תרומה, גדולה כקטנה, היא אבן בניין</strong> בבניין שיעמוד לדורות.</p>
+    </div>
+
+    <div class="hero-progress-box">
+      <div class="progress-bar-outer">
+        <div class="progress-bar-inner" id="hero-progress-bar"></div>
+      </div>
+      <div class="progress-label">
+        <span id="progress-raised-label">נאסף עד כה</span>
+        <span class="pct" id="progress-pct">0%</span>
+      </div>
+    </div>
+
+    <a href="https://meshulam.co.il/quick_payment?b=0d4d449fe13b4c1a6b294ebb5eb351f6" target="_blank" class="hero-cta" id="hero-cta">
+      <span id="hero-cta-text">לתרומה לחץ כאן</span>
+      <span class="arrow">←</span>
+    </a>
+    <div style="color: rgba(255,255,255,0.5); font-size:0.78rem; margin-top:10px;">
+      🔒 <span id="secure-text">תשלום מאובטח דרך משולם</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span id="scroll-text">גלול למטה</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual">
+        <div class="story-img-placeholder">
+          <span style="font-size:5rem; z-index:1; position:relative;">🕍</span>
+          <div class="upload-prompt" id="story-img-note">📷 כאן תוכלו להוסיף תמונה של הקהילה</div>
+        </div>
+        <div class="story-badge-float">
+          <span>❤️</span>
+          <span id="badge-community">קהילה</span>
+        </div>
+      </div>
+      <div class="story-text">
+        <h2 id="story-h2">הסיפור שלנו</h2>
+        <p id="story-p1">קהילתנו מורכבת ממשפחות שנאחזות בזהותן היהודית עם גאווה ואהבה עמוקה. שנים חלמנו על מרחב משלנו – מקום שבו ילדינו יצמחו בחינוך יהודי, שבו נתפלל יחד ושבו נחגוג את מחזור החיים.</p>
+        <p id="story-p2"><strong>הגיע הזמן להפוך את החלום למציאות.</strong> בניית בית הכנסת אינה רק פרויקט בנייה – היא השקעה בדורות הבאים, עוגן של זהות וקהילה.</p>
+        <div class="pillars" id="pillars-grid">
+          <div class="pillar"><span class="pillar-icon">🙏</span><div class="pillar-text"><strong id="p1-title">תפילה</strong><span id="p1-sub">מקום קדוש לכל</span></div></div>
+          <div class="pillar"><span class="pillar-icon">📚</span><div class="pillar-text"><strong id="p2-title">לימוד</strong><span id="p2-sub">חינוך לדורות</span></div></div>
+          <div class="pillar"><span class="pillar-icon">👨‍👩‍👧‍👦</span><div class="pillar-text"><strong id="p3-title">קהילה</strong><span id="p3-sub">חיבור בין לבבות</span></div></div>
+          <div class="pillar"><span class="pillar-icon">✡️</span><div class="pillar-text"><strong id="p4-title">מסורת</strong><span id="p4-sub">שורשים לעתיד</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DONATE ===== -->
+<section id="donate">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" id="donate-tag">תרמו עכשיו</span>
+      <h2 id="donate-h2">כל תרומה בונה עתיד</h2>
+      <p id="donate-sub">בחרו סכום ולחצו לתרומה מאובטחת</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="donation-card">
+      <div class="donation-header">
+        <h3 id="donate-card-title">תרמו לבניית בית הכנסת</h3>
+        <p id="donate-card-sub">כל שקל מקרב אותנו לחלום</p>
+      </div>
+      <div class="donation-body">
+        <div class="amount-label" id="amount-label">בחרו סכום תרומה (₪):</div>
+        <div class="amount-presets">
+          <button class="amount-btn" onclick="selectAmount(this, 100)">₪100</button>
+          <button class="amount-btn selected" onclick="selectAmount(this, 250)">₪250</button>
+          <button class="amount-btn" onclick="selectAmount(this, 500)">₪500</button>
+          <button class="amount-btn" onclick="selectAmount(this, 1000)">₪1,000</button>
+        </div>
+        <div class="custom-amount-wrap">
+          <input type="number" id="custom-amount" placeholder="" oninput="onCustomAmount(this.value)" min="1">
+          <span class="currency">₪</span>
+        </div>
+
+        <div class="donate-total-box">
+          <span class="total-label" id="total-label-text">סכום תרומתך:</span>
+          <span class="total-amount" id="donate-total-display">₪250</span>
+        </div>
+
+        <a href="https://meshulam.co.il/quick_payment?b=0d4d449fe13b4c1a6b294ebb5eb351f6" target="_blank" class="donate-submit-btn" id="donate-submit-btn">
+          ❤️ <span id="donate-btn-text">לתרומה לחץ כאן</span> ←
+        </a>
+
+        <div class="security-note">
+          🔒 <span id="security-note-text">תשלום מאובטח | SSL | meshulam</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY ===== -->
+<section id="why">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" id="why-tag">למה לתרום?</span>
+      <h2 id="why-h2">כוחה של קהילה</h2>
+      <p id="why-sub">תרומתך יוצרת השפעה עמוקה ומתמשכת</p>
+      <div class="divider"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🏛️</div>
+        <h3 id="why1-title">מקום קבוע</h3>
+        <p id="why1-text">בית כנסת קבוע לקהילה שגדלה ופורחת, מקום שיעמוד לדורות הבאים.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">👶</div>
+        <h3 id="why2-title">חינוך הדור הבא</h3>
+        <p id="why2-text">חינוך יהודי איכותי לילדינו ונכדינו – ירושה שלא ניתן לרכוש בכסף.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌍</div>
+        <h3 id="why3-title">הזדהות ושייכות</h3>
+        <p id="why3-text">מקום שיתן תחושת שייכות וגאווה יהודית לכל אחד ואחת מאיתנו.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MILESTONES ===== -->
+<section id="milestones">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" id="milestones-tag">אבני דרך</span>
+      <h2 id="milestones-h2">המסע שלנו</h2>
+      <p id="milestones-sub">כל אחוז מקרב אותנו לחלום</p>
+      <div class="divider" style="background: linear-gradient(90deg, var(--gold), var(--gold-bright));"></div>
+    </div>
+    <div class="milestones-row">
+      <div class="milestone-step" data-pct="25">
+        <div class="ms-icon">🌱</div>
+        <div class="ms-pct">25%</div>
+        <div class="ms-label" id="ms1-label">ראשית הדרך</div>
+      </div>
+      <div class="milestone-step" data-pct="50">
+        <div class="ms-icon">🏗️</div>
+        <div class="ms-pct">50%</div>
+        <div class="ms-label" id="ms2-label">חצי הדרך</div>
+      </div>
+      <div class="milestone-step" data-pct="75">
+        <div class="ms-icon">🏛️</div>
+        <div class="ms-pct">75%</div>
+        <div class="ms-label" id="ms3-label">כמעט שם</div>
+      </div>
+      <div class="milestone-step" data-pct="100">
+        <div class="ms-icon">✡️</div>
+        <div class="ms-pct">100%</div>
+        <div class="ms-label" id="ms4-label">הגשמת החלום</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" id="gallery-tag">גלריה</span>
+      <h2 id="gallery-h2">קהילה ביחד</h2>
+      <p id="gallery-sub">רגעים מיוחדים מחיי הקהילה שלנו</p>
+      <div class="divider"></div>
+    </div>
+  </div>
+
+  <div class="gallery-track-wrap">
+    <div class="gallery-track" id="gallery-track">
+      <!-- Items duplicated for infinite scroll -->
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="icon">🕍</span>
+          <span id="gal1-text">תמונת הקהילה</span>
+        </div>
+        <div class="gallery-overlay" id="gal1-overlay">הקהילה שלנו</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="icon">🕯️</span>
+          <span id="gal2-text">שבת ומועדים</span>
+        </div>
+        <div class="gallery-overlay" id="gal2-overlay">שבת שלום</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="icon">📖</span>
+          <span id="gal3-text">לימוד ותורה</span>
+        </div>
+        <div class="gallery-overlay" id="gal3-overlay">תורה ולימוד</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="icon">🎊</span>
+          <span id="gal4-text">שמחות וחגיגות</span>
+        </div>
+        <div class="gallery-overlay" id="gal4-overlay">שמחות בקהילה</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="icon">👨‍👩‍👧‍👦</span>
+          <span id="gal5-text">משפחות הקהילה</span>
+        </div>
+        <div class="gallery-overlay" id="gal5-overlay">משפחות ומסורת</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="icon">✡️</span>
+          <span id="gal6-text">זהות ומסורת</span>
+        </div>
+        <div class="gallery-overlay" id="gal6-overlay">שורשים לעתיד</div>
+      </div>
+      <!-- Duplicate for infinite loop -->
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1A4FA0, #2E73CC);">
+          <span class="icon">🕍</span>
+          <span>תמונת הקהילה</span>
+        </div>
+        <div class="gallery-overlay">הקהילה שלנו</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background: linear-gradient(135deg, #C8920A, #F5B418);">
+          <span class="icon">🕯️</span>
+          <span>שבת ומועדים</span>
+        </div>
+        <div class="gallery-overlay">שבת שלום</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background: linear-gradient(135deg, #0D2B5E, #1A4FA0);">
+          <span class="icon">📖</span>
+          <span>לימוד ותורה</span>
+        </div>
+        <div class="gallery-overlay">תורה ולימוד</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background: linear-gradient(135deg, #5A3A1A, #8B5E2A);">
+          <span class="icon">🎊</span>
+          <span>שמחות וחגיגות</span>
+        </div>
+        <div class="gallery-overlay">שמחות בקהילה</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background: linear-gradient(135deg, #2E73CC, #1A4FA0);">
+          <span class="icon">👨‍👩‍👧‍👦</span>
+          <span>משפחות הקהילה</span>
+        </div>
+        <div class="gallery-overlay">משפחות ומסורת</div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background: linear-gradient(135deg, #F5B418, #C8920A);">
+          <span class="icon">✡️</span>
+          <span>זהות ומסורת</span>
+        </div>
+        <div class="gallery-overlay">שורשים לעתיד</div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <p class="gallery-add-note" id="gallery-note">📷 תמונות מהקהילה? שלחו אלינו ונוסיף לגלריה!</p>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" id="testi-tag">קולות הקהילה</span>
+      <h2 id="testi-h2">מה אומרת הקהילה</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text" id="testi1-text">"תרמתי כי אני רוצה שלילדיי יהיה מקום לגדול בו עם גאווה יהודית. זו ההשקעה הטובה ביותר שעשיתי."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">מ</div>
+          <div>
+            <div class="testi-name" id="testi1-name">משה כהן</div>
+            <div class="testi-role" id="testi1-role">תורם וחבר קהילה</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text" id="testi2-text">"כל פעם שאני חושב על בית הכנסת החדש שייבנה, ליבי מתמלא שמחה. זה מה שהמשפחה שלנו ייחלה."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ד</div>
+          <div>
+            <div class="testi-name" id="testi2-name">דוד לוי</div>
+            <div class="testi-role" id="testi2-role">ותיק בקהילה</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text" id="testi3-text">"כשראיתי את הקמפיין הזה, ידעתי מיד שאני חייבת להצטרף. קהילה חזקה זה הבסיס לכל דבר טוב."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ר</div>
+          <div>
+            <div class="testi-name" id="testi3-name">רחל מזרחי</div>
+            <div class="testi-role" id="testi3-role">אמא וחברת קהילה</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BOTTOM CTA ===== -->
+<section id="bottom-cta">
+  <div class="container">
+    <h2 id="bottom-h2">✡️ יחד נבנה את הבית שלנו</h2>
+    <p id="bottom-p">כל תרומה, כל שקל, מקרבת אותנו לחלום. הצטרפו לאלפי בני הקהילה שכבר תרמו והיו חלק מההיסטוריה.</p>
+    <a href="https://meshulam.co.il/quick_payment?b=0d4d449fe13b4c1a6b294ebb5eb351f6" target="_blank" class="hero-cta" id="bottom-cta-btn">
+      <span id="bottom-cta-text">לתרומה לחץ כאן</span>
+      <span class="arrow">←</span>
+    </a>
+    <div class="share-row">
+      <button class="share-btn whatsapp" onclick="shareWhatsApp()">💬 <span id="share-wa">שתף בוואטסאפ</span></button>
+      <button class="share-btn facebook" onclick="shareFacebook()">👍 <span id="share-fb">שתף בפייסבוק</span></button>
+      <button class="share-btn copy" onclick="copyLink()">🔗 <span id="share-copy">העתק קישור</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STICKY DONATE ===== -->
+<div id="sticky-donate">
+  <div class="sticky-inner">
+    <span class="sticky-label" id="sticky-label">תרמו עכשיו!</span>
+    <a href="https://meshulam.co.il/quick_payment?b=0d4d449fe13b4c1a6b294ebb5eb351f6" target="_blank" class="sticky-donate-btn" id="sticky-btn">❤️ <span id="sticky-btn-text">לתרומה</span></a>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <span class="footer-star">✡️</span>
+  <h4 id="footer-title">קמפיין בניית בית הכנסת</h4>
+  <p id="footer-sub">יחד נגשים את החלום</p>
+  <div class="footer-divider"></div>
+  <div class="footer-links">
+    <a href="#story" id="footer-link1">על הקהילה</a>
+    <a href="#donate" id="footer-link2">לתרומה</a>
+    <a href="#gallery" id="footer-link3">גלריה</a>
+  </div>
+  <p style="margin-top: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.3);" id="footer-copy">© 2025 קמפיין בית הכנסת. כל הזכויות שמורות.</p>
+</footer>
+
+<!-- ===== MILESTONE TOAST ===== -->
+<div class="milestone-toast" id="milestone-toast"></div>
+
+<!-- ===== SUCCESS OVERLAY ===== -->
+<div id="success-overlay">
+  <div class="success-card">
+    <div class="success-icon">🎉</div>
+    <h3 id="success-h3">תודה רבה!</h3>
+    <p id="success-p">תרומתך תועבר לאתר התשלום. תודה שאתם חלק מהחלום!</p>
+    <button class="success-close" onclick="closeSuccess()" id="success-close-btn">סגור</button>
+  </div>
+</div>
+
+<script>
+// ===========================
+//  TRANSLATIONS
+// ===========================
+const T = {
+  he: {
+    dir: 'rtl',
+    'nav-tag': 'קמפיין תרומה',
+    'nav-title': 'בית הכנסת שלנו',
+    'nav-btn-text': 'לתרומה לחץ כאן',
+    'urgency-text': 'הצטרפו אלינו! כל תרומה בונה עתיד. יחד נגשים את החלום!',
+    'hero-badge-text': 'קמפיין גיוס כספים',
+    'hero-h1': 'נבנה יחד את<br>בית הכנסת שלנו',
+    'hero-subtitle': '<p>קהילתנו חולמת על בית תפילה משלה – מקום שיחבר לבבות, ישמר מסורת ויהיה ביתם של כל בני הקהילה.</p><p><strong>כל תרומה, גדולה כקטנה, היא אבן בניין</strong> בבניין שיעמוד לדורות.</p>',
+    'progress-raised-label': 'נאסף עד כה',
+    'hero-cta-text': 'לתרומה לחץ כאן',
+    'hero-cta-arrow': '←',
+    'secure-text': 'תשלום מאובטח דרך משולם',
+    'scroll-text': 'גלול למטה',
+    'story-img-note': '📷 כאן תוכלו להוסיף תמונה של הקהילה',
+    'badge-community': 'קהילה',
+    'story-h2': 'הסיפור שלנו',
+    'story-p1': 'קהילתנו מורכבת ממשפחות שנאחזות בזהותן היהודית עם גאווה ואהבה עמוקה. שנים חלמנו על מרחב משלנו – מקום שבו ילדינו יצמחו בחינוך יהודי, שבו נתפלל יחד ושבו נחגוג את מחזור החיים.',
+    'story-p2': '<strong>הגיע הזמן להפוך את החלום למציאות.</strong> בניית בית הכנסת אינה רק פרויקט בנייה – היא השקעה בדורות הבאים, עוגן של זהות וקהילה.',
+    'p1-title': 'תפילה', 'p1-sub': 'מקום קדוש לכל',
+    'p2-title': 'לימוד', 'p2-sub': 'חינוך לדורות',
+    'p3-title': 'קהילה', 'p3-sub': 'חיבור בין לבבות',
+    'p4-title': 'מסורת', 'p4-sub': 'שורשים לעתיד',
+    'donate-tag': 'תרמו עכשיו',
+    'donate-h2': 'כל תרומה בונה עתיד',
+    'donate-sub': 'בחרו סכום ולחצו לתרומה מאובטחת',
+    'donate-card-title': 'תרמו לבניית בית הכנסת',
+    'donate-card-sub': 'כל שקל מקרב אותנו לחלום',
+    'amount-label': 'בחרו סכום תרומה (₪):',
+    'custom-placeholder': 'סכום אחר...',
+    'total-label-text': 'סכום תרומתך:',
+    'donate-btn-text': 'לתרומה לחץ כאן',
+    'security-note-text': 'תשלום מאובטח | SSL | meshulam',
+    'why-tag': 'למה לתרום?',
+    'why-h2': 'כוחה של קהילה',
+    'why-sub': 'תרומתך יוצרת השפעה עמוקה ומתמשכת',
+    'why1-title': 'מקום קבוע', 'why1-text': 'בית כנסת קבוע לקהילה שגדלה ופורחת, מקום שיעמוד לדורות הבאים.',
+    'why2-title': 'חינוך הדור הבא', 'why2-text': 'חינוך יהודי איכותי לילדינו ונכדינו – ירושה שלא ניתן לרכוש בכסף.',
+    'why3-title': 'הזדהות ושייכות', 'why3-text': 'מקום שיתן תחושת שייכות וגאווה יהודית לכל אחד ואחת מאיתנו.',
+    'milestones-tag': 'אבני דרך',
+    'milestones-h2': 'המסע שלנו',
+    'milestones-sub': 'כל אחוז מקרב אותנו לחלום',
+    'ms1-label': 'ראשית הדרך', 'ms2-label': 'חצי הדרך', 'ms3-label': 'כמעט שם', 'ms4-label': 'הגשמת החלום',
+    'gallery-tag': 'גלריה',
+    'gallery-h2': 'קהילה ביחד',
+    'gallery-sub': 'רגעים מיוחדים מחיי הקהילה שלנו',
+    'gallery-note': '📷 תמונות מהקהילה? שלחו אלינו ונוסיף לגלריה!',
+    'gal1-text': 'תמונת הקהילה', 'gal1-overlay': 'הקהילה שלנו',
+    'gal2-text': 'שבת ומועדים', 'gal2-overlay': 'שבת שלום',
+    'gal3-text': 'לימוד ותורה', 'gal3-overlay': 'תורה ולימוד',
+    'gal4-text': 'שמחות וחגיגות', 'gal4-overlay': 'שמחות בקהילה',
+    'gal5-text': 'משפחות הקהילה', 'gal5-overlay': 'משפחות ומסורת',
+    'gal6-text': 'זהות ומסורת', 'gal6-overlay': 'שורשים לעתיד',
+    'testi-tag': 'קולות הקהילה',
+    'testi-h2': 'מה אומרת הקהילה',
+    'testi1-text': '"תרמתי כי אני רוצה שלילדיי יהיה מקום לגדול בו עם גאווה יהודית. זו ההשקעה הטובה ביותר שעשיתי."',
+    'testi1-name': 'משה כהן', 'testi1-role': 'תורם וחבר קהילה',
+    'testi2-text': '"כל פעם שאני חושב על בית הכנסת החדש שייבנה, ליבי מתמלא שמחה. זה מה שהמשפחה שלנו ייחלה."',
+    'testi2-name': 'דוד לוי', 'testi2-role': 'ותיק בקהילה',
+    'testi3-text': '"כשראיתי את הקמפיין הזה, ידעתי מיד שאני חייבת להצטרף. קהילה חזקה זה הבסיס לכל דבר טוב."',
+    'testi3-name': 'רחל מזרחי', 'testi3-role': 'אמא וחברת קהילה',
+    'bottom-h2': '✡️ יחד נבנה את הבית שלנו',
+    'bottom-p': 'כל תרומה, כל שקל, מקרבת אותנו לחלום. הצטרפו לאלפי בני הקהילה שכבר תרמו והיו חלק מההיסטוריה.',
+    'bottom-cta-text': 'לתרומה לחץ כאן',
+    'share-wa': 'שתף בוואטסאפ', 'share-fb': 'שתף בפייסבוק', 'share-copy': 'העתק קישור',
+    'sticky-label': 'תרמו עכשיו!', 'sticky-btn-text': 'לתרומה',
+    'footer-title': 'קמפיין בניית בית הכנסת',
+    'footer-sub': 'יחד נגשים את החלום',
+    'footer-link1': 'על הקהילה', 'footer-link2': 'לתרומה', 'footer-link3': 'גלריה',
+    'footer-copy': '© 2025 קמפיין בית הכנסת. כל הזכויות שמורות.',
+    'success-h3': 'תודה רבה!',
+    'success-p': 'תרומתך תועבר לאתר התשלום. תודה שאתם חלק מהחלום!',
+    'success-close-btn': 'סגור',
+    'donate-title-meta': 'בניית בית הכנסת | קמפיין תרומה',
+  },
+  en: {
+    dir: 'ltr',
+    'nav-tag': 'Donation Campaign',
+    'nav-title': 'Our Synagogue',
+    'nav-btn-text': 'Donate Now',
+    'urgency-text': 'Join us! Every donation builds a future. Together we make the dream real!',
+    'hero-badge-text': 'Fundraising Campaign',
+    'hero-h1': 'Together We Build<br>Our Synagogue',
+    'hero-subtitle': '<p>Our community dreams of its own house of prayer — a place that connects hearts, preserves tradition, and is home to every member of our community.</p><p><strong>Every donation, large or small, is a building block</strong> in a structure that will stand for generations.</p>',
+    'progress-raised-label': 'Raised So Far',
+    'hero-cta-text': 'Donate Now',
+    'hero-cta-arrow': '→',
+    'secure-text': 'Secure payment via Meshulam',
+    'scroll-text': 'Scroll Down',
+    'story-img-note': '📷 Add a community photo here',
+    'badge-community': 'Community',
+    'story-h2': 'Our Story',
+    'story-p1': 'Our community is made up of families who hold onto their Jewish identity with pride and deep love. For years we have dreamed of our own space — a place where our children will grow up with Jewish education, where we will pray together, and where we will celebrate the cycle of life.',
+    'story-p2': '<strong>The time has come to turn the dream into reality.</strong> Building a synagogue is not just a construction project — it is an investment in future generations, an anchor of identity and community.',
+    'p1-title': 'Prayer', 'p1-sub': 'A sacred place for all',
+    'p2-title': 'Learning', 'p2-sub': 'Education for generations',
+    'p3-title': 'Community', 'p3-sub': 'Connecting hearts',
+    'p4-title': 'Tradition', 'p4-sub': 'Roots for the future',
+    'donate-tag': 'Donate Now',
+    'donate-h2': 'Every Donation Builds a Future',
+    'donate-sub': 'Choose an amount and click to donate securely',
+    'donate-card-title': 'Donate to Build Our Synagogue',
+    'donate-card-sub': 'Every shekel brings us closer to the dream',
+    'amount-label': 'Choose Donation Amount (₪):',
+    'custom-placeholder': 'Other amount...',
+    'total-label-text': 'Your Donation:',
+    'donate-btn-text': 'Donate Now',
+    'security-note-text': 'Secure Payment | SSL | Meshulam',
+    'why-tag': 'Why Donate?',
+    'why-h2': 'The Power of Community',
+    'why-sub': 'Your donation creates a deep and lasting impact',
+    'why1-title': 'A Permanent Home', 'why1-text': 'A permanent synagogue for a growing and flourishing community, a place that will stand for future generations.',
+    'why2-title': 'Next Generation Education', 'why2-text': 'Quality Jewish education for our children and grandchildren — a legacy that cannot be bought with money.',
+    'why3-title': 'Identity & Belonging', 'why3-text': 'A place that gives a sense of belonging and Jewish pride to every one of us.',
+    'milestones-tag': 'Milestones',
+    'milestones-h2': 'Our Journey',
+    'milestones-sub': 'Every percent brings us closer to the dream',
+    'ms1-label': 'The Beginning', 'ms2-label': 'Halfway There', 'ms3-label': 'Almost There', 'ms4-label': 'Dream Fulfilled',
+    'gallery-tag': 'Gallery',
+    'gallery-h2': 'Community Together',
+    'gallery-sub': 'Special moments from our community life',
+    'gallery-note': '📷 Have community photos? Send them to us and we\'ll add them to the gallery!',
+    'gal1-text': 'Community Photo', 'gal1-overlay': 'Our Community',
+    'gal2-text': 'Shabbat & Holidays', 'gal2-overlay': 'Shabbat Shalom',
+    'gal3-text': 'Torah & Learning', 'gal3-overlay': 'Torah & Study',
+    'gal4-text': 'Celebrations', 'gal4-overlay': 'Community Celebrations',
+    'gal5-text': 'Community Families', 'gal5-overlay': 'Families & Tradition',
+    'gal6-text': 'Identity & Tradition', 'gal6-overlay': 'Roots for the Future',
+    'testi-tag': 'Community Voices',
+    'testi-h2': 'What Our Community Says',
+    'testi1-text': '"I donated because I want my children to have a place to grow up with Jewish pride. It\'s the best investment I\'ve ever made."',
+    'testi1-name': 'Moshe Cohen', 'testi1-role': 'Donor & Community Member',
+    'testi2-text': '"Every time I think about the new synagogue that will be built, my heart fills with joy. This is what our family has always hoped for."',
+    'testi2-name': 'David Levy', 'testi2-role': 'Long-time Community Member',
+    'testi3-text': '"When I saw this campaign, I immediately knew I had to join. A strong community is the foundation for everything good."',
+    'testi3-name': 'Rachel Mizrahi', 'testi3-role': 'Mother & Community Member',
+    'bottom-h2': '✡️ Together We Build Our Home',
+    'bottom-p': 'Every donation, every shekel, brings us closer to the dream. Join thousands of community members who have already donated and be part of history.',
+    'bottom-cta-text': 'Donate Now',
+    'share-wa': 'Share on WhatsApp', 'share-fb': 'Share on Facebook', 'share-copy': 'Copy Link',
+    'sticky-label': 'Donate Now!', 'sticky-btn-text': 'Donate',
+    'footer-title': 'Synagogue Building Campaign',
+    'footer-sub': 'Together we make the dream real',
+    'footer-link1': 'About Us', 'footer-link2': 'Donate', 'footer-link3': 'Gallery',
+    'footer-copy': '© 2025 Synagogue Campaign. All rights reserved.',
+    'success-h3': 'Thank You!',
+    'success-p': 'Your donation will be directed to the payment site. Thank you for being part of the dream!',
+    'success-close-btn': 'Close',
+    'donate-title-meta': 'Build Our Synagogue | Donation Campaign',
+  },
+  es: {
+    dir: 'ltr',
+    'nav-tag': 'Campaña de Donación',
+    'nav-title': 'Nuestra Sinagoga',
+    'nav-btn-text': 'Donar Ahora',
+    'urgency-text': '¡Únanse a nosotros! Cada donación construye un futuro. ¡Juntos hacemos realidad el sueño!',
+    'hero-badge-text': 'Campaña de Recaudación',
+    'hero-h1': 'Juntos Construimos<br>Nuestra Sinagoga',
+    'hero-subtitle': '<p>Nuestra comunidad sueña con tener su propio lugar de oración — un lugar que une corazones, preserva la tradición y es el hogar de cada miembro de nuestra comunidad.</p><p><strong>Cada donación, grande o pequeña, es un bloque de construcción</strong> en un edificio que perdurará por generaciones.</p>',
+    'progress-raised-label': 'Recaudado Hasta Ahora',
+    'hero-cta-text': 'Donar Ahora',
+    'hero-cta-arrow': '→',
+    'secure-text': 'Pago seguro a través de Meshulam',
+    'scroll-text': 'Desplazarse hacia abajo',
+    'story-img-note': '📷 Agregue una foto de la comunidad aquí',
+    'badge-community': 'Comunidad',
+    'story-h2': 'Nuestra Historia',
+    'story-p1': 'Nuestra comunidad está formada por familias que se aferran a su identidad judía con orgullo y amor profundo. Durante años hemos soñado con nuestro propio espacio — un lugar donde nuestros hijos crezcan con educación judía, donde recemos juntos y donde celebremos el ciclo de la vida.',
+    'story-p2': '<strong>Ha llegado el momento de convertir el sueño en realidad.</strong> La construcción de una sinagoga no es solo un proyecto de construcción — es una inversión en las generaciones futuras, un ancla de identidad y comunidad.',
+    'p1-title': 'Oración', 'p1-sub': 'Un lugar sagrado para todos',
+    'p2-title': 'Aprendizaje', 'p2-sub': 'Educación para generaciones',
+    'p3-title': 'Comunidad', 'p3-sub': 'Conectando corazones',
+    'p4-title': 'Tradición', 'p4-sub': 'Raíces para el futuro',
+    'donate-tag': 'Dona Ahora',
+    'donate-h2': 'Cada Donación Construye un Futuro',
+    'donate-sub': 'Elige un monto y haz clic para donar de forma segura',
+    'donate-card-title': 'Dona para Construir Nuestra Sinagoga',
+    'donate-card-sub': 'Cada shekel nos acerca al sueño',
+    'amount-label': 'Elige el Monto de Donación (₪):',
+    'custom-placeholder': 'Otro monto...',
+    'total-label-text': 'Tu Donación:',
+    'donate-btn-text': 'Donar Ahora',
+    'security-note-text': 'Pago Seguro | SSL | Meshulam',
+    'why-tag': '¿Por Qué Donar?',
+    'why-h2': 'El Poder de la Comunidad',
+    'why-sub': 'Tu donación crea un impacto profundo y duradero',
+    'why1-title': 'Un Hogar Permanente', 'why1-text': 'Una sinagoga permanente para una comunidad creciente y próspera, un lugar que perdurará para las generaciones futuras.',
+    'why2-title': 'Educación de la Próxima Generación', 'why2-text': 'Educación judía de calidad para nuestros hijos y nietos — un legado que no se puede comprar con dinero.',
+    'why3-title': 'Identidad y Pertenencia', 'why3-text': 'Un lugar que da sentido de pertenencia y orgullo judío a cada uno de nosotros.',
+    'milestones-tag': 'Hitos',
+    'milestones-h2': 'Nuestro Viaje',
+    'milestones-sub': 'Cada porcentaje nos acerca al sueño',
+    'ms1-label': 'El Comienzo', 'ms2-label': 'A Mitad de Camino', 'ms3-label': 'Casi Llegamos', 'ms4-label': 'Sueño Cumplido',
+    'gallery-tag': 'Galería',
+    'gallery-h2': 'Comunidad Unida',
+    'gallery-sub': 'Momentos especiales de la vida de nuestra comunidad',
+    'gallery-note': '📷 ¿Tienes fotos de la comunidad? ¡Envíanoslas y las añadiremos a la galería!',
+    'gal1-text': 'Foto Comunitaria', 'gal1-overlay': 'Nuestra Comunidad',
+    'gal2-text': 'Shabat y Festividades', 'gal2-overlay': 'Shabat Shalom',
+    'gal3-text': 'Torá y Aprendizaje', 'gal3-overlay': 'Torá y Estudio',
+    'gal4-text': 'Celebraciones', 'gal4-overlay': 'Celebraciones Comunitarias',
+    'gal5-text': 'Familias Comunitarias', 'gal5-overlay': 'Familias y Tradición',
+    'gal6-text': 'Identidad y Tradición', 'gal6-overlay': 'Raíces para el Futuro',
+    'testi-tag': 'Voces de la Comunidad',
+    'testi-h2': 'Lo Que Dice Nuestra Comunidad',
+    'testi1-text': '"Doné porque quiero que mis hijos tengan un lugar donde crecer con orgullo judío. Es la mejor inversión que he hecho."',
+    'testi1-name': 'Moshe Cohen', 'testi1-role': 'Donante y Miembro de la Comunidad',
+    'testi2-text': '"Cada vez que pienso en la nueva sinagoga que se construirá, mi corazón se llena de alegría. Esto es lo que nuestra familia siempre esperó."',
+    'testi2-name': 'David Levy', 'testi2-role': 'Miembro Veterano de la Comunidad',
+    'testi3-text': '"Cuando vi esta campaña, supe de inmediato que tenía que unirme. Una comunidad fuerte es la base de todo lo bueno."',
+    'testi3-name': 'Rachel Mizrahi', 'testi3-role': 'Madre y Miembro de la Comunidad',
+    'bottom-h2': '✡️ Juntos Construimos Nuestro Hogar',
+    'bottom-p': 'Cada donación, cada shekel, nos acerca al sueño. Únase a miles de miembros de la comunidad que ya han donado y sea parte de la historia.',
+    'bottom-cta-text': 'Donar Ahora',
+    'share-wa': 'Compartir en WhatsApp', 'share-fb': 'Compartir en Facebook', 'share-copy': 'Copiar Enlace',
+    'sticky-label': '¡Dona Ahora!', 'sticky-btn-text': 'Donar',
+    'footer-title': 'Campaña de Construcción de Sinagoga',
+    'footer-sub': 'Juntos hacemos realidad el sueño',
+    'footer-link1': 'Sobre Nosotros', 'footer-link2': 'Donar', 'footer-link3': 'Galería',
+    'footer-copy': '© 2025 Campaña Sinagoga. Todos los derechos reservados.',
+    'success-h3': '¡Muchas Gracias!',
+    'success-p': 'Tu donación será dirigida al sitio de pago. ¡Gracias por ser parte del sueño!',
+    'success-close-btn': 'Cerrar',
+    'donate-title-meta': 'Construir Nuestra Sinagoga | Campaña de Donación',
+  }
+};
+
+let currentLang = 'he';
+let selectedAmount = 250;
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.body.className = 'lang-' + lang;
+  document.body.dir = t.dir;
+  document.title = t['donate-title-meta'] || document.title;
+
+  // Update all text nodes
+  for (const [id, val] of Object.entries(t)) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (id === 'hero-h1' || id === 'story-p2' || id === 'hero-subtitle' || id === 'bottom-h2') {
+      el.innerHTML = val;
+    } else if (id.startsWith('hero-cta-arrow') || id === 'hero-cta-arrow') {
+      // handled separately
+    } else {
+      el.textContent = val;
+    }
+  }
+
+  // Custom amount placeholder
+  const ca = document.getElementById('custom-amount');
+  if (ca) ca.placeholder = t['custom-placeholder'] || '';
+
+  // CTA arrows direction
+  const arrows = document.querySelectorAll('.hero-cta .arrow, .donate-submit-btn .arrow, #bottom-cta-btn .arrow');
+  arrows.forEach(a => a.textContent = t['hero-cta-arrow'] || (lang === 'he' ? '←' : '→'));
+
+  // Language button states
+  ['he','en','es'].forEach(l => {
+    document.getElementById('btn-' + l).classList.toggle('active', l === lang);
+  });
+
+  updateDonateDisplay();
+}
+
+// ===========================
+//  AMOUNT SELECTION
+// ===========================
+function selectAmount(btn, amount) {
+  selectedAmount = amount;
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('custom-amount').value = '';
+  updateDonateDisplay();
+}
+
+function onCustomAmount(val) {
+  if (val && parseInt(val) > 0) {
+    selectedAmount = parseInt(val);
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    updateDonateDisplay();
+  }
+}
+
+function updateDonateDisplay() {
+  document.getElementById('donate-total-display').textContent = '₪' + selectedAmount.toLocaleString();
+}
+
+// ===========================
+//  SCROLL BEHAVIORS
+// ===========================
+function initScroll() {
+  const navbar = document.getElementById('navbar');
+  const sticky = document.getElementById('sticky-donate');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+    if (y > window.innerHeight * 0.6) sticky.classList.add('show'); else sticky.classList.remove('show');
+    checkMilestones(false);
+  });
+}
+
+// ===========================
+//  PROGRESS BAR ANIMATION
+// ===========================
+function animateProgress() {
+  const targetPct = 42; // Configurable campaign progress %
+  setTimeout(() => {
+    const bar = document.getElementById('hero-progress-bar');
+    if (bar) bar.style.width = targetPct + '%';
+    document.getElementById('progress-pct').textContent = targetPct + '%';
+    checkMilestones(false);
+  }, 600);
+}
+
+// ===========================
+//  MILESTONES
+// ===========================
+function checkMilestones(animate) {
+  const pct = 42;
+  document.querySelectorAll('.milestone-step').forEach(step => {
+    const threshold = parseInt(step.dataset.pct);
+    if (pct >= threshold) {
+      step.classList.add('reached');
+    }
+  });
+}
+
+// ===========================
+//  PARTICLES
+// ===========================
+function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${Math.random() * 4 + 2}px;
+      height: ${Math.random() * 4 + 2}px;
+      animation-duration: ${Math.random() * 14 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(p);
+  }
+}
+
+// ===========================
+//  SHARE
+// ===========================
+function shareWhatsApp() {
+  const url = window.location.href;
+  const msgs = {
+    he: `🕍 הצטרפו אלינו לבניית בית הכנסת שלנו! תרמו כאן: ${url}`,
+    en: `🕍 Join us in building our synagogue! Donate here: ${url}`,
+    es: `🕍 ¡Únanse a nosotros para construir nuestra sinagoga! Dona aquí: ${url}`,
+  };
+  window.open(`https://wa.me/?text=${encodeURIComponent(msgs[currentLang])}`);
+}
+function shareFacebook() {
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`);
+}
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const msgs = { he: 'הקישור הועתק!', en: 'Link copied!', es: '¡Enlace copiado!' };
+    alert(msgs[currentLang]);
+  });
+}
+
+// ===========================
+//  SUCCESS OVERLAY
+// ===========================
+function closeSuccess() {
+  document.getElementById('success-overlay').classList.remove('show');
+}
+
+// ===========================
+//  INIT
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+  createParticles();
+  initScroll();
+  animateProgress();
+  setLang('he');
+
+  // Set custom amount placeholder
+  document.getElementById('custom-amount').placeholder = 'סכום אחר...';
+});
+</script>
+</body>
+</html>
