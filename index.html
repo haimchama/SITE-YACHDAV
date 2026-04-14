@@ -8,7 +8,7 @@
 <meta property="og:title" content="בניין בית הכנסת שלנו">
 <meta property="og:description" content="עזרו לנו לבנות בית לקהילה שלנו. כל תרומה מקרבת אותנו לחלום.">
 <meta property="og:type" content="website">
-<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="icon" type="image/png" href="images/logo3d.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -91,7 +91,7 @@
   /* ===== NAV ===== */
   #navbar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    transition: background 0.8s, box-shadow 0.8s;
+    transition: background 0.10s, box-shadow 0.10s;
     padding: 0 20px;
   }
   #navbar.scrolled {
@@ -141,17 +141,23 @@
   .nav-donate:hover { background: white !important; }
   /* ===== LOGO 3D ===== */
   @keyframes spin3d {
-    from { transform: rotateY(0deg); }
-    to   { transform: rotateY(360deg); }
+    from { transform: scale(1.3) rotateY(0deg); }
+    to   { transform: scale(1.3) rotateY(360deg); }
+  }
+  .nav-logo3d-wrap {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 14px rgba(245,180,24,0.65));
   }
   .nav-logo3d {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: block;
-    border-radius: 50%;
     object-fit: cover;
-    animation: spin3d 8s linear infinite;
-    filter: drop-shadow(0 0 12px rgba(245,180,24,0.6));
+    animation: spin3d 6s linear infinite;
   }
 
   /* ===== HERO ===== */
@@ -768,7 +774,7 @@
   }
   .family-card-img img {
     width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.8s ease;
+    transition: transform 0.10s ease;
   }
   .family-card:hover .family-card-img img { transform: scale(1.06); }
   .family-card-img .family-card-badge {
@@ -966,7 +972,7 @@
     background: white; border-radius: var(--radius);
     padding: 40px; max-width: 420px; width: 90%;
     text-align: center;
-    animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) both;
+    animation: popIn 0.10s cubic-bezier(0.34,1.56,0.64,1) both;
   }
   .share-card h3 { font-size: 1.5rem; color: var(--blue-deep); margin-bottom: 8px; }
   .share-card p { color: var(--text-secondary); margin-bottom: 24px; font-size: 0.95rem; }
@@ -1072,8 +1078,8 @@
     padding: 16px 32px;
     border-radius: var(--radius-pill);
     box-shadow: var(--shadow-lg);
-    animation: toastIn 0.8s cubic-bezier(0.34,1.56,0.64,1) both,
-               toastOut 0.8s ease 2.5s forwards;
+    animation: toastIn 0.10s cubic-bezier(0.34,1.56,0.64,1) both,
+               toastOut 0.10s ease 2.5s forwards;
     display: none;
   }
   @keyframes toastIn {
@@ -1108,7 +1114,9 @@
 <nav id="navbar">
   <div class="nav-inner">
     <div class="nav-logo">
-      <img src="images/logo3d.png" alt="לוגו" class="nav-logo3d">
+      <div class="nav-logo3d-wrap">
+        <img src="images/logo3d.png" alt="לוגו" class="nav-logo3d">
+      </div>
     </div>
     <div class="nav-links">
       <img src="images/LOGOYACH.jpeg" alt="לוגו" class="nav-logotr">
@@ -1600,7 +1608,7 @@ function initScrollBehaviors() {
     const pct = getPct();
     const bar = document.getElementById('hero-progress-bar');
     if (bar && pct >= 90 && pct < 100) {
-      bar.style.animation = 'shimmer 0.8s ease-in-out infinite';
+      bar.style.animation = 'shimmer 0.10s ease-in-out infinite';
     }
   });
 }
